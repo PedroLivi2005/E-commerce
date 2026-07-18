@@ -2,3 +2,112 @@
   margin: 0;
   padding: 0;
 }
+
+body {
+  background-color: #f1f1f1;
+}
+
+/* Header */
+
+.menu-principal {
+  display: flex;
+  align-items: center; /* Centraliza todos os itens verticalmente */
+  justify-content: space-between; /* Distribui os itens horizontalmente com espaço entre eles */
+  gap: 30px; /* Garante um espaçamento mínimo entre cada bloco */
+  padding: 18px 80px; /* Adiciona um respiro interno (cima/baixo e laterais) */
+  background-color: #ed0030;
+  color: #ffffff;
+  font-family: "Roboto Flex", sans-serif;
+  font-weight: bold;
+}
+
+#login-e-cadastro {
+  display: flex;
+  align-items: center; /* Alinha a logo e o texto "olá..." lado a lado verticalmente */
+  gap: 15px; /* Espaço entre a logo e o texto */
+}
+
+.menu-principal svg {
+    display: block;
+}
+
+/*Form busca*/
+
+/* Estilo básico para o input de busca não quebrar o layout */
+.menu-principal input {
+    width: 100%;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+}
+
+/* Opcional: Ajusta o formulário de busca para ocupar o espaço central */
+.menu-principal form {
+    flex-grow: 1; /* Faz a barra de busca crescer e ocupar o espaço livre no meio */
+    max-width: 600px; /* Limita a largura máxima da barra de busca */
+    display: flex;
+}
+
+/* Container do input e do ícone */
+.form-busca {
+    position: relative; /* Define o formulário como ponto de referência */
+    display: flex; 
+    flex-grow: 1;
+    max-width: 600px;
+}
+
+/* O campo de texto em si */
+.form-busca input {
+    width: 100%;
+    /* O segundo valor (40px) é o padding da DIREITA. 
+       Ele precisa ser maior para o texto não passar por baixo do ícone */
+    padding: 10px 40px 10px 15px; 
+    border: none;
+    border-radius: 8px;
+    outline: none;
+}
+
+/* O ícone de lupa */
+.icone-busca {
+    position: absolute;
+    right: 10px; /* Distância do ícone até a borda direita do input */
+    top: 50%; /* Joga o ícone para a metade da altura */
+    transform: translateY(-50%); /* Centraliza perfeitamente no eixo vertical */
+    width: 24px; /* Mantém o tamanho que você pediu */
+    height: 24px;
+    cursor: pointer; /* Deixa a setinha do mouse com formato de mão clicável */
+}
+
+/*Header secundário*/
+
+.menu-secundario {
+    display: flex;
+    justify-content: space-between; /* Separa a entrega dos links */
+    align-items: center;
+    background-color: #ed0030;
+    color: #ffffff;
+    padding: 10px 90px;
+    font-family: "Roboto Flex", sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* Deixa a lista de links na horizontal */
+.links-secundarios ul {
+    display: flex;
+    gap: 25px; /* Espaço entre cada link */
+    list-style: none; /* Remove as bolinhas da lista */
+    margin: 0;
+    padding: 0;
+}
+
+/* Remove o sublinhado padrão dos links e herda a cor branca */
+.links-secundarios a {
+    text-decoration: none;
+    color: inherit;
+    font-weight: 700; /* Aplica o negrito em todos, ajuste conforme necessário */
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
