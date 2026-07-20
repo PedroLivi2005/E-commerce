@@ -1,0 +1,22 @@
+
+button {
+  background-color: #ed0030;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  
+  /* Controla a suavidade da transição (ex: 300 milissegundos) */
+  transition: all 0.1s ease;
+}
+
+button:hover {
+  background-color: #bd0020;
+  
+  /* Desloca o botão 5 pixels para cima */
+  /* transform: translateY(-5px); */
+  
+  /* Adiciona uma sombra suave */
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+}

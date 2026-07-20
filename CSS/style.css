@@ -7,7 +7,7 @@ body {
   background-color: #f1f1f1;
 }
 
-/* Header */
+/* Header principal */
 
 .menu-principal {
   display: flex;
@@ -79,7 +79,13 @@ body {
     cursor: pointer; /* Deixa a setinha do mouse com formato de mão clicável */
 }
 
-/*Header secundário*/
+
+/*Header vermelho secundário*/
+
+/*Informe CEP*/
+.info-entrega abbr {
+    text-decoration: none;
+}
 
 .menu-secundario {
     display: flex;
@@ -87,7 +93,7 @@ body {
     align-items: center;
     background-color: #ed0030;
     color: #ffffff;
-    padding: 10px 90px;
+    padding: 10px 90px 0px 90px;
     font-family: "Roboto Flex", sans-serif;
     font-weight: bold;
     font-size: 14px;
@@ -96,7 +102,7 @@ body {
 /* Deixa a lista de links na horizontal */
 .links-secundarios ul {
     display: flex;
-    gap: 25px; /* Espaço entre cada link */
+    /*gap: 25px;*/ /* Espaço entre cada link */
     list-style: none; /* Remove as bolinhas da lista */
     margin: 0;
     padding: 0;
@@ -104,10 +110,48 @@ body {
 
 /* Remove o sublinhado padrão dos links e herda a cor branca */
 .links-secundarios a {
+    background-color: #ed0030;
+    padding: 10px 10px;
+    border-top-left-radius: 7px;      /* Canto superior esquerdo */
+    border-top-right-radius: 7px;     /* Canto superior direito */
     text-decoration: none;
     color: inherit;
     font-weight: 700; /* Aplica o negrito em todos, ajuste conforme necessário */
     display: flex;
     align-items: center;
     gap: 5px;
+    /*Efeito mouse*/
+    cursor: pointer;
+    transition: all 0.1s ease;
 }
+ 
+.links-secundarios a:hover {
+    /*Efeito mouse*/
+    background-color: #bd0020;
+} 
+
+/* Header branco inferior */
+
+.menu-branco {
+    display: flex;
+    justify-content: space-between; /* Separa a entrega dos links */
+    align-items: center;
+    background-color: #ffffff;
+    padding: 10px 90px;
+    font-family: "Roboto Flex", sans-serif;
+    font-size: 14px;
+}
+
+.menu-branco a {
+    text-decoration: none;
+    color: #666666;
+}
+
+.links-menu-branco ul {
+    display: flex;
+    gap: 25px; /* Espaço entre cada link */
+    list-style: none; /* Remove as bolinhas da lista */
+    margin: 0;
+    padding: 0;
+}
+
