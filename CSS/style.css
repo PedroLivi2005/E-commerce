@@ -137,21 +137,66 @@ body {
     justify-content: space-between; /* Separa a entrega dos links */
     align-items: center;
     background-color: #ffffff;
-    padding: 10px 90px;
+    padding: 10px 99px 10px 90px;
     font-family: "Roboto Flex", sans-serif;
     font-size: 14px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, .078);
 }
 
 .menu-branco a {
     text-decoration: none;
-    color: #666666;
+    /* color: #666666; */
 }
 
+
+/* Contêiner principal do menu-departamentos */
+.departamentos {
+    display: flex;
+    align-items: center; /* Centraliza o ícone e o texto verticalmente */
+    color: #666666;
+    cursor: pointer;
+    transition: color 0.1s ease-in-out;
+}
+
+/* Ícone menu departamentos */
+.icone-menu-departamentos {
+    width: 24px;
+    height: 24px; 
+    background-image: url('../imagens/icone-menu-cinza.png'); 
+    background-size: cover; 
+    background-position: center; 
+    margin-right: 8px; /* Espaço entre o ícone e o texto */
+    transition: background-image 0.1s ease-in-out; 
+}
+
+.texto-menu-departamentos {
+    margin: 0;
+}
+
+.departamentos:hover {
+    color: #ed0030;
+}
+
+.departamentos:hover .icone-menu-departamentos {
+    background-image: url('../imagens/icone-menu-vermelho.png');
+}
+
+/* Links header branco*/
 .links-menu-branco ul {
     display: flex;
-    gap: 25px; /* Espaço entre cada link */
+    gap: 63px; /* Espaço entre cada link */
     list-style: none; /* Remove as bolinhas da lista */
     margin: 0;
     padding: 0;
 }
 
+.links-menu-branco a {
+    color: #666666;
+
+    cursor: pointer;
+    transition: all 0.1s ease;
+}
+
+.links-menu-branco a:hover {
+    color: #ed0030;
+}

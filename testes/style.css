@@ -20,3 +20,41 @@ button:hover {
   /* Adiciona uma sombra suave */
   /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
 }
+
+
+
+/* Contêiner principal do menu */
+.item-menu {
+  display: flex;
+  align-items: center; /* Centraliza o ícone e o texto verticalmente */
+  color: #666666;
+  cursor: pointer;
+  transition: color 0.1s ease-in-out;
+}
+
+/* O ícone com tamanho fixo */
+.imagem-menu {
+  width: 24px;
+  height: 24px; 
+  background-image: url('../imagens/icone-menu-cinza.png'); 
+  background-size: cover; 
+  background-position: center; 
+  margin-right: 8px; /* Espaço entre o ícone e o texto */
+  transition: background-image 0.1s ease-in-out; 
+}
+
+/* Remove a margem padrão do parágrafo para não desalinhar */
+.texto-menu {
+  margin: 0;
+}
+
+/* EFEITOS DE HOVER */
+/* Quando o mouse passar no contêiner (.item-menu), muda a cor do texto... */
+.item-menu:hover {
+  color: #ed0030;
+}
+
+/* ...e também muda a imagem do ícone */
+.item-menu:hover .imagem-menu {
+  background-image: url('../imagens/icone-menu-vermelho.png');
+}
