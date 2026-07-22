@@ -14,14 +14,18 @@ body {
   align-items: center; /* Centraliza todos os itens verticalmente */
   justify-content: space-between; /* Distribui os itens horizontalmente com espaço entre eles */
   gap: 30px; /* Garante um espaçamento mínimo entre cada bloco */
-  padding: 18px 80px; /* Adiciona um respiro interno (cima/baixo e laterais) */
+  padding: 10px 80px; /* Adiciona um respiro interno (cima/baixo e laterais) */
   background-color: #ed0030;
   color: #ffffff;
   font-family: "Roboto Flex", sans-serif;
   font-weight: bold;
 }
 
-#login-e-cadastro {
+.menu-principal img {
+    cursor: pointer;
+}
+
+.login-e-cadastro {
   display: flex;
   align-items: center; /* Alinha a logo e o texto "olá..." lado a lado verticalmente */
   gap: 15px; /* Espaço entre a logo e o texto */
@@ -84,7 +88,8 @@ body {
 
 /*Informe CEP*/
 .info-entrega abbr {
-    text-decoration: none;
+    text-decoration: none !important;
+    border-bottom: none !important;
 }
 
 .menu-secundario {
@@ -199,4 +204,37 @@ body {
 
 .links-menu-branco a:hover {
     color: #ed0030;
+}
+
+/* Banners Ofertas */
+.banner-section {
+  margin-top: 0px;
+  margin-bottom: 0;
+  background: transparent;
+  padding: 0;
+  width: 100%; /* Garante que a seção ocupe a tela toda */
+}
+
+.banner-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Cria as 3 colunas iguais */
+  gap: 15px; /* Define o espaço entre os banners (ajuste como preferir) */
+  
+  /* CÓDIGO PARA CENTRALIZAR */
+  max-width: 1200px; /* Limita a largura. Você pode mudar para 1100px, 1300px, etc. */
+  margin: 0 auto; /* O 'auto' nas laterais empurra o conteúdo para o meio da tela */
+}
+
+.banner-promo {
+  width: 100%;
+  height: 100%;
+}
+
+.banner-promo a {
+  display: block; /* Garante que o link ocupe todo o espaço */
+}
+
+.banner-promo img {
+  width: 100%; /* Faz a imagem preencher a coluna inteira */
+  display: block;
 }

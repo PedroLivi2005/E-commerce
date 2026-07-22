@@ -58,3 +58,38 @@ button:hover {
 .item-menu:hover .imagem-menu {
   background-image: url('../imagens/icone-menu-vermelho.png');
 }
+
+
+/* Banners Ofertas */
+
+.banner-section {
+  margin-top: 0px;
+  margin-bottom: 0;
+  background: transparent;
+  padding: 0;
+  width: 100%; /* Garante que a seção ocupe a tela toda */
+}
+
+.banner-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Cria as 3 colunas iguais */
+  gap: 15px; /* Define o espaço entre os banners (ajuste como preferir) */
+  
+  /* CÓDIGO PARA CENTRALIZAR */
+  max-width: 1200px; /* Limita a largura. Você pode mudar para 1100px, 1300px, etc. */
+  margin: 0 auto; /* O 'auto' nas laterais empurra o conteúdo para o meio da tela */
+}
+
+.banner-promo {
+  width: 100%;
+  height: 100%;
+}
+
+.banner-promo a {
+  display: block; /* Garante que o link ocupe todo o espaço */
+}
+
+.banner-promo img {
+  width: 100%; /* Faz a imagem preencher a coluna inteira */
+  display: block;
+}
