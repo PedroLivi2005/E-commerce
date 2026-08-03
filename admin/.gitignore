@@ -1,1 +1,11 @@
 /coreui-free-bootstrap-admin-template-v5.5.0-dist/
+
+assets/
+authentication/
+components/
+css/
+error-pages/
+forms/
+icons/
+js/
+vendors/
