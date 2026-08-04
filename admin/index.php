@@ -1,3 +1,7 @@
+<?php
+  session_start();
+?>
+
 <!DOCTYPE html>
 <!--
 * CoreUI - Free Bootstrap Admin Template
@@ -61,15 +65,15 @@
           <div class="card p-4">
             <div class="card-body d-flex flex-column gap-4">
               <h2 class="h5 text-center">Acesse sua conta do Sistema</h2>
-              <form class="row gap-3" action="./" method="get" autocomplete="off" novalidate>
+              <form class="row gap-3" action="valida_login.php" method="post" autocomplete="off" name="ds_email" novalidate>
                 <div>
                   <label class="form-label" for="email">Endereço de email</label>
-                  <input class="form-control" id="email" type="email" placeholder="seu@email.com" autocomplete="off">
+                  <input class="form-control" id="email" type="email" placeholder="seu@email.com" autocomplete="off" name="ds_email">
                 </div>
                 <div>
                   
                   <div class="input-group">
-                    <input class="form-control" id="password" type="password" placeholder="Sua senha" autocomplete="off">
+                    <input class="form-control" id="password" type="password" placeholder="Sua senha" autocomplete="off" name="ds_senha">
                     <span class="input-group-text">
                       <button class="bg-transparent border-0 p-0 link-secondary" type="button" data-coreui-toggle="tooltip" aria-label="Show password" data-coreui-original-title="Show password">
                         <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -86,6 +90,13 @@
                   <button class="btn btn-primary w-100" type="submit">Entrar</button>
                 </div>
               </form>
+
+              <?php
+                if (isset($_SESSION['erro_login'])) {
+                  echo "<p>" . $_SESSION['erro_login'] . "</p>";
+                  unset($_SESSION['erro_login']);
+                }
+              ?>
               
             </div>
           </div>
@@ -93,6 +104,9 @@
         </div>
       </div>
     </div>
+
+    
+
     <!-- CoreUI and necessary plugins-->
     <script src="vendors/@coreui/coreui/js/coreui.bundle.min.js"></script>
     <script src="vendors/simplebar/js/simplebar.min.js"></script>

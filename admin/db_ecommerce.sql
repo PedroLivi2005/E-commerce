@@ -58,3 +58,19 @@ CREATE TABLE Banners (
     cd_categoria INT NOT NULL,
     FOREIGN KEY (cd_categoria) REFERENCES categorias(cd_categoria)
 );
+
+INSERT INTO Usuarios (
+    nm_usuario, 
+    ds_email, 
+    ds_senha, 
+    dt_nascimento, 
+    fg_sexo, 
+    fg_status
+) VALUES (
+    'Teste Usuario', 
+    'teste.usuario@email.com', 
+    '123', -- Exemplo de hash de senha
+    '1995-08-20', 
+    'M', 
+    'A'
+);
