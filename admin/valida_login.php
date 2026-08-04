@@ -2,12 +2,12 @@
 
 session_start();
 
-require('conexao.php');
+require('./includes/conexao.php');
 
 $ds_email = $_POST['ds_email'] ?? '';
 $ds_senha = $_POST['ds_senha'] ?? '';
 
-$sql = "SELECT cd_usuario, ds_senha FROM Usuarios WHERE ds_email = :ds_email LIMIT 1";
+$sql = "SELECT cd_usuario, ds_senha, nm_usuario FROM Usuarios WHERE ds_email = :ds_email LIMIT 1";
 
 $stmt = $pdo->prepare($sql);
 
@@ -18,7 +18,8 @@ if ($stmt->rowCount() > 0) {
     $dados = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (password_verify($ds_senha, $dados['ds_senha'])) {
-        $_SESSION['usuario_id'] = $dados['cd_usuario'];
+        $_SESSION['cd_usuario'] = $dados['cd_usuario'];
+        $_SESSION['nm_usuario'] = $dados['nm_usuario'];
         $_SESSION['usuario_email'] = $ds_email;
         header('Location: home.php');
         exit();

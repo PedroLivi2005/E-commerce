@@ -1,5 +1,7 @@
 <?php
   session_start();
+  extract($_GET);
+
 ?>
 
 <!DOCTYPE html>
@@ -85,7 +87,6 @@
                     </span>
                   </div>
                 </div>
-                
                 <div>
                   <button class="btn btn-primary w-100" type="submit">Entrar</button>
                 </div>
@@ -106,7 +107,6 @@
     </div>
 
     
-
     <!-- CoreUI and necessary plugins-->
     <script src="vendors/@coreui/coreui/js/coreui.bundle.min.js"></script>
     <script src="vendors/simplebar/js/simplebar.min.js"></script>

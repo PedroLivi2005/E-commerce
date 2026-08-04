@@ -69,7 +69,7 @@ INSERT INTO Usuarios (
 ) VALUES (
     'Teste Usuario', 
     'teste.usuario@email.com', 
-    '123', -- Exemplo de hash de senha
+    '123', 
     '1995-08-20', 
     'M', 
     'A'
