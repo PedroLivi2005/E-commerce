@@ -8,7 +8,6 @@ CREATE TABLE Usuarios (
     fg_status CHAR(1) CHECK (fg_status IN ('A', 'I'))
 );
 
-
 CREATE TABLE Categorias (
 	cd_categoria INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     ds_categoria VARCHAR(100) NOT NULL,
@@ -23,7 +22,6 @@ CREATE TABLE Subcategorias (
     FOREIGN KEY (cd_categoria)
     REFERENCES categorias(cd_categoria)
 );
-
 
 CREATE TABLE Produtos (
 	cd_produto INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -72,5 +70,13 @@ INSERT INTO Usuarios (
     '123', 
     '1995-08-20', 
     'M', 
+    'A'
+);
+
+INSERT INTO Categorias (
+    ds_categoria,
+    fg_status
+) VALUES (
+    '',
     'A'
 );

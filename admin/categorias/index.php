@@ -1,14 +1,14 @@
 <?php 
-    include('includes/valida_sessao.php');
+    include('../includes/valida_sessao.php');
 ?>
     <!-- inicio  -->
-    <?php include 'preheader.php'?>
+    <?php include '../preheader'?>
     <!-- fim -->
-    <?php include 'menu.php'?>
+    <?php include '../menu.php'?>
 
     <div class="wrapper d-flex flex-column min-vh-100">
 
-    <?php include 'header.php'?>
+    <?php include '../header.php'?>
 
         <div class="body flex-grow-1">
             <div class="container-lg px-4">
@@ -34,6 +34,22 @@
             </form>
 
     </div>
-    <?php include 'plugins.php'?>
+    <!-- CoreUI and necessary plugins-->
+    <script src="vendors/@coreui/coreui/js/coreui.bundle.min.js"></script>
+    <script src="vendors/simplebar/js/simplebar.min.js"></script>
+    <script>
+      const header = document.querySelector("header.header");
+
+      document.addEventListener("scroll", () => {
+        if (header) {
+          header.classList.toggle("shadow-sm", document.documentElement.scrollTop > 0);
+        }
+      });
+    </script>
+    <!-- Plugins and scripts required by this view-->
+    <script src="vendors/chart.js/js/chart.umd.js"></script>
+    <script src="vendors/@coreui/chartjs/js/coreui-chartjs.js"></script>
+    <script src="vendors/@coreui/utils/js/index.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
