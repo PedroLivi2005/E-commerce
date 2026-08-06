@@ -1,14 +1,14 @@
-<?php 
+<?php
     include('includes/valida_sessao.php');
 ?>
     <!-- inicio  -->
-    <?php include 'preheader.php'?>
+    <?php include './includes/preheader.php'?>
     <!-- fim -->
-    <?php include 'menu.php'?>
+    <?php include './includes/menu.php'?>
 
     <div class="wrapper d-flex flex-column min-vh-100">
 
-    <?php include 'header.php'?>
+    <?php include './includes/header.php'?>
 
         <div class="body flex-grow-1">
             <div class="container-lg px-4">
@@ -34,6 +34,6 @@
             </form>
 
     </div>
-    <?php include 'plugins.php'?>
+    <?php include './includes/plugins.php'?>
 </body>
 </html>
