@@ -7,9 +7,7 @@ class CadastroCategoria {
 
     public function formCadastroCategoria() {
         return "
-            <div>
-                
-            </div>
+            
         ";
     }
 }

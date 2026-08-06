@@ -1,55 +1,60 @@
-<?php 
+<?php
     include('../includes/valida_sessao.php');
 ?>
     <!-- inicio  -->
-    <?php include '../preheader'?>
+    <?php include '../includes/preheader.php'?>
     <!-- fim -->
-    <?php include '../menu.php'?>
+    <?php include '../includes/menu.php'?>
 
     <div class="wrapper d-flex flex-column min-vh-100">
 
-    <?php include '../header.php'?>
+    <?php include '../includes/header.php'?>
 
         <div class="body flex-grow-1">
             <div class="container-lg px-4">
-                <h2>Página Inicial</h2>
                 <p>Usuário: <?= $_SESSION['usuario_email'] ?></p>
-                
-                <button class="btn btn-danger">
-                    <a href="logout.php">Sair</a>
-                </button>
             </div>
         </div>
-
+        <?php 
+            $ds_categoria = $_POST['ds_categoria'] ?? null;
+            $fg_status = $_POST['fg_status'] ?? null;
+        ?>
+        <div>
             <form action="" method="post">
                 <label for="ds_categoria">Categoria</label>
                 <input class="form-control" type="text" placeholder="Nome da categoria" aria-label="default input example" name="ds_categoria" id="ds_categoria" required>
                 
-                <label for="descricao">Status</label>
-                <select class="form-select" aria-label="Default select example">
+                <label for="fg_status">Status</label>
+                <select class="form-select" aria-label="Default select example" name="fg_status" id="fg_status">
                     <option value="A">Ativo</option>
                     <option value="I">Inativo</option>
                 </select>
                 <input type="submit" class="btn btn-success" value="Cadastrar">
             </form>
+        </div>
+        <?php 
+            include '../includes/conexao.php';
 
-    </div>
-    <!-- CoreUI and necessary plugins-->
-    <script src="vendors/@coreui/coreui/js/coreui.bundle.min.js"></script>
-    <script src="vendors/simplebar/js/simplebar.min.js"></script>
-    <script>
-      const header = document.querySelector("header.header");
+            if (!empty($ds_categoria)) {
+            try {
+                $sql = "INSERT INTO Categorias (ds_categoria, fg_status) VALUES (:ds_categoria, :fg_status)";
 
-      document.addEventListener("scroll", () => {
-        if (header) {
-          header.classList.toggle("shadow-sm", document.documentElement.scrollTop > 0);
+                $stmt = $pdo->prepare($sql);
+                $stmt->bindParam(":ds_categoria", $ds_categoria);
+                $stmt->bindParam(":fg_status", $fg_status);
+
+                if ($stmt->execute()) {
+                    echo "Categoria criada com sucesso!";
+                } else {
+                    "Erro ao criar a categoria";
+                }
+                print $ds_categoria . $fg_status;
+            } catch(PDOException $e) {
+                $erro = 'Erro: ' . $e->getMessage();
+            }
         }
-      });
-    </script>
-    <!-- Plugins and scripts required by this view-->
-    <script src="vendors/chart.js/js/chart.umd.js"></script>
-    <script src="vendors/@coreui/chartjs/js/coreui-chartjs.js"></script>
-    <script src="vendors/@coreui/utils/js/index.js"></script>
-    <script src="js/main.js"></script>
+        ?>
+    </div>
+    <?php include '../includes/plugins.php'?>
 </body>
 </html>

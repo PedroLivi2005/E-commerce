@@ -2,6 +2,8 @@
 
 session_start();
 
+include('configURL.php');
+
 if (($_SESSION['cd_usuario'] == null ) && ($_SESSION['nm_usuario'] == null )){
     $tipo_msg = 2;
     $desc_msg = 'Sua Sessaõ Expirou';
