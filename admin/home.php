@@ -14,14 +14,10 @@
             <div class="container-lg px-4">
                 <h2>Página Inicial</h2>
                 <p>Usuário: <?= $_SESSION['usuario_email'] ?></p>
-                
-                <button class="btn btn-danger">
-                    <a href="logout.php">Sair</a>
-                </button>
             </div>
         </div>
 
-            <form action="" method="post">
+            <!-- <form action="" method="post">
                 <label for="ds_categoria">Categoria</label>
                 <input class="form-control" type="text" placeholder="Nome da categoria" aria-label="default input example" name="ds_categoria" id="ds_categoria" required>
                 
@@ -31,7 +27,7 @@
                     <option value="I">Inativo</option>
                 </select>
                 <input type="submit" class="btn btn-success" value="Cadastrar">
-            </form>
+            </form> -->
 
     </div>
     <?php include './includes/plugins.php'?>

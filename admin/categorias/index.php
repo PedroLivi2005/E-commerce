@@ -1,6 +1,36 @@
 <?php
     include('../includes/valida_sessao.php');
 ?>
+<?php 
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $ds_categoria = trim($_POST['ds_categoria'] ?? '');
+        $fg_status = $_POST['fg_status'] ?? '';
+        $erro = "";
+
+        if (!empty($ds_categoria)) {
+            include '../includes/conexao.php';
+            try {
+                $sql = "INSERT INTO Categorias (ds_categoria, fg_status) VALUES (:ds_categoria, :fg_status)";
+
+                $stmt = $pdo->prepare($sql);
+                $stmt->bindParam(":ds_categoria", $ds_categoria);
+                $stmt->bindParam(":fg_status", $fg_status);
+
+                if ($stmt->execute()) {
+                    // Redireciona para a mesma página passando '?sucesso=1' na URL
+                    header("Location: " . $_SERVER['PHP_SELF'] . "?sucesso=1");
+                    exit;
+                } else {
+                    $erro = "Erro ao criar a categoria";
+                }
+            } catch(PDOException $e) {
+                $erro = "Erro de Banco de Dados: " . $e->getMessage();
+            }
+        } else {
+            $erro = "O nome da categoria não pode estar vazio.";
+        }
+    }
+?>
     <!-- inicio  -->
     <?php include '../includes/preheader.php'?>
     <!-- fim -->
@@ -12,12 +42,18 @@
 
         <div class="body flex-grow-1">
             <div class="container-lg px-4">
+                <h1>Categoria</h1>
                 <p>Usuário: <?= $_SESSION['usuario_email'] ?></p>
             </div>
         </div>
         <?php 
-            $ds_categoria = $_POST['ds_categoria'] ?? null;
-            $fg_status = $_POST['fg_status'] ?? null;
+            if (isset($_GET['sucesso']) && $_GET['sucesso'] == '1') {
+                echo "<div class='alert alert-success mt-3'>Categoria criada com sucesso!</div>";
+            }
+
+            if (!empty($erro)) {
+                echo "<div class='alert alert-danger mt-3'>$erro</div>";
+            }
         ?>
         <div>
             <form action="" method="post">
@@ -32,28 +68,6 @@
                 <input type="submit" class="btn btn-success" value="Cadastrar">
             </form>
         </div>
-        <?php 
-            include '../includes/conexao.php';
-
-            if (!empty($ds_categoria)) {
-            try {
-                $sql = "INSERT INTO Categorias (ds_categoria, fg_status) VALUES (:ds_categoria, :fg_status)";
-
-                $stmt = $pdo->prepare($sql);
-                $stmt->bindParam(":ds_categoria", $ds_categoria);
-                $stmt->bindParam(":fg_status", $fg_status);
-
-                if ($stmt->execute()) {
-                    echo "Categoria criada com sucesso!";
-                } else {
-                    "Erro ao criar a categoria";
-                }
-                print $ds_categoria . $fg_status;
-            } catch(PDOException $e) {
-                $erro = 'Erro: ' . $e->getMessage();
-            }
-        }
-        ?>
     </div>
     <?php include '../includes/plugins.php'?>
 </body>
