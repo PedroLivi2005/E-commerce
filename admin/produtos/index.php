@@ -12,12 +12,8 @@
 
         <div class="body flex-grow-1">
             <div class="container-lg px-4">
-                <h2>Página Inicial</h2>
+                <h2>Produtos</h2>
                 <p>Usuário: <?= $_SESSION['usuario_email'] ?></p>
-                
-                <button class="btn btn-danger">
-                    <a href="../logout.php">Sair</a>
-                </button>
             </div>
         </div>
 
