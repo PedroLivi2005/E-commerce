@@ -80,3 +80,5 @@ INSERT INTO Categorias (
     '',
     'A'
 );
+
+SELECT ds_categoria, fg_status FROM categorias;

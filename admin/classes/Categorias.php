@@ -5,6 +5,9 @@ class Categorias {
     public $ds_categoria;
     public $fg_status;
 
+    const TABLE                 = "categorias";
+	const ID                    = "cd_categoria";
+
     // Propriedade privada para guardar a conexão PDO
     private $conn;
 
@@ -13,49 +16,72 @@ class Categorias {
         $this->conn = $db;
     }
 
-    public function inserir() {
-        // 1. Criar a query SQL com "named placeholders" (os dois pontos :)
-        $query = "INSERT INTO Categorias (ds_categoria, fg_status) VALUES (:ds_categoria, :fg_status)";
+    public function insert() {
+		$colunas = null;
+		$valores = null;
+		
+		try{
 
-        // 2. Preparar a query
-        $stmt = $this->conn->prepare($query);
+			TTransaction::open();
 
-        // (Opcional) Limpar os dados para evitar injeção de HTML/scripts indesejados
-        $this->ds_categoria = htmlspecialchars(strip_tags($this->ds_categoria));
-        $this->fg_status = htmlspecialchars(strip_tags($this->fg_status));
+			$sql = "INSERT INTO ".self::TABLE;
+			
+			foreach($this as $key=>$campo){
+				if($key != self::ID){
+					if($colunas == ''){
+						$colunas = $key;
+					}
+					else{
+						$colunas .= ', '.$key;
+					}
+					
+					if($valores == ''){
+						$valores = "'".$campo."'";;
+					}
+					else{
+						$valores .= ", '".$campo."'";
+					}
+				}
+			}
+			
+			$sql .= " (".$colunas.") VALUES (".$valores.") ";
+			
+			
+			$sql = "SELECT max(cd_categoria) as cd_categoria 
+				from ".self::TABLE." 
+				WHERE ds_categoria = '".$this->ds_categoria."' 
+        		AND fg_status = '".$this->fg_status."' ";
 
-        // 3. Fazer o bind (ligação) dos valores com os placeholders
-        $stmt->bindValue(':ds_categoria', $this->ds_categoria);
-        $stmt->bindValue(':fg_status', $this->fg_status);
+			$conn = TTransaction::get();
+			$result = $conn->query($sql);
+			
+			$data = $result->fetch(PDO::FETCH_ASSOC);
+			
+			foreach($data as $key=>$campo){
+				$this->$key = $campo;
+			}
+			
+			//fecha a transação aplicando todas as transações
+			TTransaction::close();
+			
+			return $data;
+			
+		} catch (Exception $ex) {
+								
+			TTransaction::log("Erro ao inserir ".self::TABLE." na base de dados. ".$ex->getMessage(), $usuario_erro, 'Não Informado');
+			TTransaction::rollback();
+			
+			return false;
+		}
+	}
 
-        // 4. Executar a query
-        if ($stmt->execute()) {
-            return true;
-        }
+	public function listar() {
+		$sql = "SELECT * FROM ".self::TABLE;
 
-        // Retorna false caso algo dê errado
-        return false;
-    }
+		$stmt = $this->conn->query($sql);
+
+		while ($linha = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			echo "Nome: {$linha['ds_categoria']} - Status: {$linha['fg_status']} <a class='btn btn-success btn-sm' href='edicao.php?cd_categoria=".$linha['cd_categoria']."'>EDITAR</a><br/>";
+		}
+	}
 }
-
-/*
-    public function listar() {
-    }*/
-
-/*
-    public function inserir() {
-        $sql = "INSERT INTO categorias";
-
-        foreach(){
-            
-        }
-        $stmt = $this->conn->prepare($query);
-
-        $stmt->bindParam(':ds_categoria', $ds_categoria);
-        $stmt->bindParam(':fg_status', $fg_status);
-
-        if ($stmt->execute()) {
-            return true;
-        }
-        return false;
-    }*/
