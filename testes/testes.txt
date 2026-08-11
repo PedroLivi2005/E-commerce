@@ -59,3 +59,19 @@
     }*/
 
     Classe Categorias baseado em OrdemServiço do gestor
+
+--------------
+form inicial
+<div>
+    <form action="" method="post">
+        <label for="ds_categoria">Categoria</label>
+        <input class="form-control" type="text" placeholder="Nome da categoria" aria-label="default input example" name="ds_categoria" id="ds_categoria" required>
+        
+        <label for="fg_status">Status</label>
+        <select class="form-select" aria-label="Default select example" name="fg_status" id="fg_status">
+            <option value="A">Ativo</option>
+            <option value="I">Inativo</option>
+        </select>
+        <input type="submit" class="btn btn-success" value="Cadastrar">
+    </form>
+</div>

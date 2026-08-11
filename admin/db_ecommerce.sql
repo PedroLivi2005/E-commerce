@@ -5,19 +5,19 @@ CREATE TABLE Usuarios (
     ds_senha VARCHAR(255) NOT NULL,
     dt_nascimento DATE,
     fg_sexo CHAR(1) CHECK (fg_sexo IN ('M', 'F')),
-    fg_status CHAR(1) CHECK (fg_status IN ('A', 'I'))
+    fg_status CHAR(1) DEFAULT 'A' CHECK (fg_status IN ('A', 'I'))
 );
 
 CREATE TABLE Categorias (
 	cd_categoria INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     ds_categoria VARCHAR(100) NOT NULL,
-    fg_status CHAR(1) CHECK (fg_status IN ('A', 'I'))
+    fg_status CHAR(1) DEFAULT 'A' CHECK (fg_status IN ('A', 'I'))
 );
 
 CREATE TABLE Subcategorias (
 	cd_subcategoria INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     ds_subcategoria VARCHAR(100),
-    fg_status CHAR(1) CHECK (fg_status IN ('A', 'I')),
+    fg_status CHAR(1) DEFAULT 'A' CHECK (fg_status IN ('A', 'I')),
     cd_categoria INT NOT NULL,
     FOREIGN KEY (cd_categoria)
     REFERENCES categorias(cd_categoria)
@@ -82,3 +82,7 @@ INSERT INTO Categorias (
 );
 
 SELECT ds_categoria, fg_status FROM categorias;
+
+-- Em casa atualizar Categorias, Subcategorias, Usuarios
+ALTER TABLE Categorias 
+MODIFY COLUMN fg_status CHAR(1) NOT NULL DEFAULT 'A';
