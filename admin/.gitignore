@@ -9,3 +9,6 @@ forms/
 icons/
 js/
 vendors/
+node_modules/
+package-lock.json
+package.json

@@ -76,12 +76,12 @@ class Categorias {
 	}
 
 	public function listar() {
-		$sql = "SELECT * FROM ".self::TABLE;
-
+		$sql = "SELECT cd_categoria, ds_categoria, fg_status FROM ".self::TABLE;
 		$stmt = $this->conn->query($sql);
-
+		return $stmt->fetchAll(PDO::FETCH_ASSOC);
+		/*
 		while ($linha = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			echo "Nome: {$linha['ds_categoria']} - Status: {$linha['fg_status']} <a class='btn btn-success btn-sm' href='edicao.php?cd_categoria=".$linha['cd_categoria']."'>EDITAR</a><br/>";
-		}
+		}*/
 	}
 }

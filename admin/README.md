@@ -6,3 +6,6 @@ Exemplo:
 <?php
 
 define('BASE_URL', '/E-commerce/admin/');
+
+intalar icons em admin
+npm install @coreui/icons --save

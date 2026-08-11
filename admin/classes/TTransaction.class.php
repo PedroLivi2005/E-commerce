@@ -22,7 +22,7 @@ final class TTransaction {
      * método open()
      * recebe o nome do banco de dados e instancia o objeto PDO correspondente
      */
-    public static function open($nome = 'my_gestor02'){
+    public static function open($nome = 'db_ecommerce'){
         //abre uma conexão e armazena na propriedade estatica $conn
         if(empty(self::$conn)){
             self::$conn = TConnection::open($nome);
@@ -68,15 +68,17 @@ final class TTransaction {
      * método setLogger
      * define qual estratégia (algoritmo de LOG será usado)
      */
+    /*
     public static function setLogger(TLogger $logger){
         self::$logger = $logger;
-    }
+    }*/
     
     /*
      * método log()
      * armazena uma mensagem no arquivo de LOG
      * baseada na estratégia ($logger) atual
      */
+    /*
     public static function log($mensagem, $usuario, $pessoa){
         $usuario_erro = explode(" - ", $usuario);
         
@@ -94,5 +96,5 @@ final class TTransaction {
         $chamado->fg_prioridade         = 0;
         $chamado->insert();
         
-    }
+    }*/
 }

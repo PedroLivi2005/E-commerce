@@ -39,21 +39,53 @@
                     </div>
                 </div>
 
-        <!--Component Tables CoreUI -->
+        <!-- Component Tables CoreUI -->
         <div class="box box-primary">
             <div class="box-body">
                 <button type="button" class="btn btn-success margin pull-right" onclick="window.location = 'cadastro.php'">Inserir novo</button>
 
-                <?php
-                    include '../classes/Categorias.php';
-                    $list = new Categorias($pdo);
-
-                    $list->listar();
-                ?>
+                <div class="tab-content rounded-bottom">
+                    <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-1005">
+                      <table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nome da Categoria</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Editar</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <?php
+                            include '../classes/Categorias.php';
+                            include '../includes/conexao.php';
+                            
+                            $list = new Categorias($pdo);
+                            $categorias = $list->listar();
+                            
+                            foreach ($categorias as $linha) {
+                          ?>
+                              <tr>
+                                <th scope="row"><?php echo $linha['cd_categoria']; ?></th>
+                                <td><?php echo $linha['ds_categoria']; ?></td>
+                                <td><?php echo $linha['fg_status']; ?></td>
+                                <td>
+                                  <a class="btn btn-success btn-sm" href="edicao.php?cd_categoria=<?php echo $linha['cd_categoria']; ?>">
+                                    <i class="icon cil-color-border"></i>
+                                  </a>
+                                </td>
+                              </tr>
+                          <?php
+                            }
+                          ?>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+              
             </div>
         </div>
-            
-
+                
         <!--<div class="row">
             <div class="col-12">
                 <div class="card mb-4">
