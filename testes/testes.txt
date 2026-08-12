@@ -75,3 +75,75 @@ form inicial
         <input type="submit" class="btn btn-success" value="Cadastrar">
     </form>
 </div>
+
+<div class="row">
+    <div class="col-12">
+        <form action="categorias/index.php" method="post">
+            <div class="row g-3">
+                <div class="col-8">
+                    <input class="form-control" type="text" placeholder="Nome da categoria" aria-label="default input example" name="ds_categoria" id="ds_categoria" required>
+                </div>
+                <div class="col-2">
+                    <select class="form-select" aria-label="Default select example" name="fg_status" id="fg_status">
+                        <option value="A">Ativo</option>
+                        <option value="I">Inativo</option>
+                    </select>
+                </div>
+                <div class="col-2">
+                    <input type="submit" class="btn btn-success" value="Cadastrar">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+classe Categorias
+//Refazer
+    public function insert() {
+		$colunas = null;
+		$valores = null;
+		
+		try{
+			TTransaction::open();
+			$sql = "INSERT INTO ".self::TABLE;
+			foreach($this as $key=>$campo){
+				if($key != self::ID){
+					if($colunas == ''){
+						$colunas = $key;
+					}
+					else{
+						$colunas .= ', '.$key;
+					}
+					
+					if($valores == ''){
+						$valores = "'".$campo."'";;
+					}
+					else{
+						$valores .= ", '".$campo."'";
+					}
+				}
+			}
+			$sql .= " (".$colunas.") VALUES (".$valores.") ";
+			//conexão com o banco
+			TTransaction::open();
+			$conn = TTransaction::get();
+			$sql = "SELECT max(cd_categoria) as cd_categoria 
+				from ".self::TABLE." 
+				WHERE ds_categoria = '".$this->ds_categoria."' 
+        		AND fg_status = '".$this->fg_status."' ";
+			$conn = TTransaction::get();
+			$result = $conn->query($sql);
+			$data = $result->fetch(PDO::FETCH_ASSOC);
+			
+			foreach($data as $key=>$campo){
+				$this->$key = $campo;
+			}
+			//fecha a transação aplicando todas as transações
+			TTransaction::close();
+			return $data;
+			
+		} catch (Exception $ex) {
+			TTransaction::rollback();
+			return false;
+		}
+	}

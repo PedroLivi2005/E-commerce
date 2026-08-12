@@ -10,66 +10,48 @@ class Categorias {
 	const ID                    = "cd_categoria";
 
 	//Refazer
-    public function insert() {
-		$colunas = null;
-		$valores = null;
-		
-		try{
+    // Método estático para ser chamado como Categorias::inserir($dados)
+    public static function inserir($dados) {
+        try {
+            // Abre a conexão com o banco
+            TTransaction::open();
+            $conn = TTransaction::get();
+            
+            // Remove o ID do array caso tenha vindo do form (deixa o banco gerenciar o auto-increment)
+            if (isset($dados[self::ID])) {
+                unset($dados[self::ID]);
+            }
 
-			TTransaction::open();
-
-			$sql = "INSERT INTO ".self::TABLE;
-			
-			foreach($this as $key=>$campo){
-				if($key != self::ID){
-					if($colunas == ''){
-						$colunas = $key;
-					}
-					else{
-						$colunas .= ', '.$key;
-					}
-					
-					if($valores == ''){
-						$valores = "'".$campo."'";;
-					}
-					else{
-						$valores .= ", '".$campo."'";
-					}
-				}
-			}
-			
-			$sql .= " (".$colunas.") VALUES (".$valores.") ";
-
-			//conexão com o banco
-			TTransaction::open();
-			$conn = TTransaction::get();
-			
-			$sql = "SELECT max(cd_categoria) as cd_categoria 
-				from ".self::TABLE." 
-				WHERE ds_categoria = '".$this->ds_categoria."' 
-        		AND fg_status = '".$this->fg_status."' ";
-
-			$conn = TTransaction::get();
-			$result = $conn->query($sql);
-			
-			$data = $result->fetch(PDO::FETCH_ASSOC);
-			
-			foreach($data as $key=>$campo){
-				$this->$key = $campo;
-			}
-			
-			//fecha a transação aplicando todas as transações
-			TTransaction::close();
-			
-			return $data;
-			
-		} catch (Exception $ex) {
-								
-			TTransaction::rollback();
-			
-			return false;
-		}
-	}
+            // Monta as colunas e os placeholders (ex: :ds_categoria, :fg_status) dinamicamente
+            $colunas = implode(', ', array_keys($dados));
+            $placeholders = ':' . implode(', :', array_keys($dados));
+            
+            // Monta a query final de INSERT
+            $sql = "INSERT INTO " . self::TABLE . " ($colunas) VALUES ($placeholders)";
+            $stmt = $conn->prepare($sql);
+            
+            // Faz o bind dinâmico dos valores, protegendo contra SQL Injection
+            foreach ($dados as $key => $value) {
+                $stmt->bindValue(':' . $key, $value);
+            }
+            
+            // Executa a inserção
+            $stmt->execute();
+            
+            // Recupera o ID gerado pelo banco (útil caso precise usar depois)
+            $last_id = $conn->lastInsertId();
+            
+            TTransaction::close();
+            
+            return $last_id;
+            
+        } catch (Exception $ex) {
+            
+            TTransaction::rollback();
+            
+            return false;
+        }
+    }
 
 	static function listar($ds_categoria = null) {
 
