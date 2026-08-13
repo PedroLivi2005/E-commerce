@@ -9,11 +9,9 @@ class Categorias {
     const TABLE                 = "categorias";
 	const ID                    = "cd_categoria";
 
-	//Refazer
-    // Método estático para ser chamado como Categorias::inserir($dados)
+	
     public static function inserir($dados) {
         try {
-            // Abre a conexão com o banco
             TTransaction::open();
             $conn = TTransaction::get();
             
@@ -35,7 +33,6 @@ class Categorias {
                 $stmt->bindValue(':' . $key, $value);
             }
             
-            // Executa a inserção
             $stmt->execute();
             
             // Recupera o ID gerado pelo banco (útil caso precise usar depois)
@@ -102,4 +99,39 @@ class Categorias {
 			return false;
 		}
 	}
+
+    static function update($cd_categoria, $ds_categoria) {
+        try {
+            // Abre a transação com o banco de dados
+            TTransaction::open();
+
+            // Monta a query de UPDATE
+            $sql = "UPDATE " . self::TABLE . " 
+                    SET ds_categoria = :ds_categoria 
+                    WHERE " . self::ID . " = :cd_categoria";
+
+            // Obtém a conexão
+            $conn = TTransaction::get();
+            $stmt = $conn->prepare($sql);
+
+            // Proteção contra SQL Injection (Bind dos parâmetros)
+            $stmt->bindValue(':ds_categoria', $ds_categoria, PDO::PARAM_STR);
+            $stmt->bindValue(':cd_categoria', $cd_categoria, PDO::PARAM_INT);
+
+            // Executa a instrução
+            $sucesso = $stmt->execute();
+
+            // Fecha a transação aplicando as mudanças no banco (Commit)
+            TTransaction::close();
+
+            return $sucesso;
+
+        } catch (Exception $ex) {
+            // Desfaz as operações em caso de erro (Rollback)
+            TTransaction::rollback();
+            
+            // Aqui você pode adicionar um log do erro se necessário: erro_log($ex->getMessage());
+            return false;
+        }
+    }
 }
