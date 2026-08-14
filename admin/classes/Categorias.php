@@ -9,7 +9,6 @@ class Categorias {
     const TABLE                 = "categorias";
 	const ID                    = "cd_categoria";
 
-	
     public static function inserir($dados) {
         try {
             TTransaction::open();
@@ -102,10 +101,9 @@ class Categorias {
 
     static function update($cd_categoria, $ds_categoria) {
         try {
-            // Abre a transação com o banco de dados
+
             TTransaction::open();
 
-            // Monta a query de UPDATE
             $sql = "UPDATE " . self::TABLE . " 
                     SET ds_categoria = :ds_categoria 
                     WHERE " . self::ID . " = :cd_categoria";

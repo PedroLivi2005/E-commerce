@@ -151,11 +151,11 @@
         <div class="container-fluid px-4">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb my-0">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="../admin/home.php">Home</a></li>
               <?php
-              if(@$breadcrumb_item){
-                print '<li class="breadcrumb-item active"><span>'.$breadcrumb_item.'</span></li>';
-              }
+                if(@$breadcrumb_item){
+                  print '<li class="breadcrumb-item active"><span>'.$breadcrumb_item.'</span></li>';
+                }
               ?>
             </ol>
           </nav>

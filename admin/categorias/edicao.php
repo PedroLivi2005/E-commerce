@@ -21,8 +21,6 @@
         $breadcrumb_item = 'Categorias';
         include '../includes/header.php';
 
-        //include '../classes/Categorias.php';
-        include '../includes/conexao.php';
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // 1. Captura os dados do array $_POST. 
@@ -39,17 +37,17 @@
                 // 4. Dá o feedback ao usuário
                 if ($atualizou) {
                     // Sucesso! Pode redirecionar ou exibir mensagem
-                    echo "A categoria foi atualizada com sucesso!";
+                    echo "<div class='alert alert-success' role='alert'>A categoria foi atualizada com sucesso!</div>";
                     // header("Location: lista_categorias.php"); exit;
                 } else {
-                    echo "Erro ao atualizar no banco de dados.";
+                    echo "<div class='alert alert-danger' role='alert'>Erro ao atualizar no banco de dados.</div>";
                 }
                 
             } else {
-                echo "Por favor, preencha todos os campos corretamente.";
+                echo "<div class='alert alert-danger' role='alert'>Por favor, preencha todos os campos corretamente.</div>";
             }
         } else {
-            echo "Preencha os campos.";
+            echo "<div class='alert alert-info' role='alert'>Preencha os campos.</div>";
         }
         
         /*
