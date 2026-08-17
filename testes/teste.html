@@ -37,7 +37,7 @@
             <p class="texto-menu">Meu Texto do Menu</p>
         </div>
 
-        <h2>Teste carrosel</h2>
+        <!-- <h2>Teste carrosel</h2>
         <div id="carouselExampleIndicators" class="carousel slide w-75 mx-auto" data-bs-theme="dark">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -63,9 +63,9 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
-        </div>
+        </div> -->
 
-        <div class="banner-section">
+        <!-- <div class="banner-section">
             <div class="banner-container">
                 <div class="banner-promo">
                     <a href=""><img src="../imagens/banner-oferta-limpeza.webp" alt="Banner oferta de produtos de limpeza"></a>
@@ -77,9 +77,9 @@
                     <a href=""><img src="../imagens/banner-oferta-beleza.webp" alt="Banner oferta produtos de beleza"></a>
                 </div>
             </div>
-        </div>
+        </div> -->
 
-            <form action="" method="post">
+            <!-- <form action="" method="post">
                 <label for="ds_categoria">Categoria</label>
                 <input type="text" name="ds_categoria" id="ds_categoria" required>
                 
@@ -89,8 +89,56 @@
                     <option value="I">Inativo</option>
                 </select>
                 <input type="submit" class="btn btn-success" value="Inserir">
-            </form>
+            </form> -->
 
+            <!-- <button id="meuBotao">Enviar</button>
+            <p id="resultado"></p> -->
+
+        <form id="meuFormulario">
+            <label for="usuario_id">ID do Usuário:</label>
+            <input type="number" id="usuario_id" name="usuario_id" required>
+            <br><br>
+
+            <label for="mensagem">Mensagem:</label>
+            <textarea id="mensagem" name="mensagem" required></textarea>
+            <br><br>
+
+            <button type="submit" id="btnEnviar">Enviar</button>
+        </form>
+
+        <p id="resultado"></p>
+
+        <script>
+            const form = document.getElementById('meuFormulario');
+            const resultado = document.getElementById('resultado');
+
+            form.addEventListener('submit', async (e) => {
+            // Impede o recarregamento padrão da página ao enviar o form
+            e.preventDefault();
+
+            // Captura automaticamente todos os campos do form pelo atributo 'name'
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch('processa.php', {
+                method: 'POST',
+                body: formData // Não defina Content-Type no header; o navegador define o multipart boundary automaticamente
+                });
+
+                const data = await response.json();
+                
+                if (data.status === 'sucesso') {
+                resultado.innerText = `Sucesso: ${data.resposta}`;
+                form.reset(); // Limpa os campos após o envio
+                } else {
+                resultado.innerText = `Erro: ${data.resposta}`;
+                }
+            } catch (erro) {
+                console.error('Erro na requisição:', erro);
+                resultado.innerText = 'Falha ao conectar com o servidor.';
+            }
+            });
+        </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>
