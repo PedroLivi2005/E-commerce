@@ -147,3 +147,15 @@ classe Categorias
 			return false;
 		}
 	}
+
+      <?php
+        /*
+            if (isset($_GET['sucesso']) && $_GET['sucesso'] == '1') {
+                echo "<div class='alert alert-success mt-3'>Categoria cadastrada com sucesso!</div>";
+            }
+            // Exibe mensagens de erro do POST, caso existam
+            if (!empty($mensagem)) {
+                echo $mensagem;
+            }
+        */
+        ?>

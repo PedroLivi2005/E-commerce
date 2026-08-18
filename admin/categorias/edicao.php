@@ -77,7 +77,6 @@
                                                             <div class="col-10">
                                                                 <input class="form-control" type="text" placeholder="Nome da categoria" aria-label="default input example" name="ds_categoria" id="ds_categoria" value="" required>
                                                             </div>
-                                                            
                                                             <div class="col-1">
                                                                 <input type="submit" class="btn btn-success" value="Salvar">
                                                             </div>
