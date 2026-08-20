@@ -159,3 +159,79 @@ classe Categorias
             }
         */
         ?>
+
+public static function inserir2($dados) {
+        try {
+            TTransaction::open();
+            $conn = TTransaction::get();
+            
+            // Remove o ID do array caso tenha vindo do form (deixa o banco gerenciar o auto-increment)
+            if (isset($dados[self::ID])) {
+                unset($dados[self::ID]);
+            }
+
+            // Monta as colunas e os placeholders (ex: :ds_categoria, :fg_status) dinamicamente
+            $colunas = implode(', ', array_keys($dados));
+            $placeholders = ':' . implode(', :', array_keys($dados));
+            
+            // Monta a query final de INSERT
+            $sql = "INSERT INTO " . self::TABLE . " ($colunas) VALUES ($placeholders)";
+            $stmt = $conn->prepare($sql);
+            
+            // Faz o bind dinâmico dos valores, protegendo contra SQL Injection
+            foreach ($dados as $key => $value) {
+                $stmt->bindValue(':' . $key, $value);
+            }
+            
+            $stmt->execute();
+            
+            // Recupera o ID gerado pelo banco (útil caso precise usar depois)
+            $last_id = $conn->lastInsertId();
+            
+            TTransaction::close();
+            
+            return $last_id;
+            
+        } catch (Exception $ex) {
+            
+            TTransaction::rollback();
+            
+            return false;
+        }
+    }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            // 1. Captura os dados do array $_POST. 
+            // O operador '??' evita erros caso o campo não tenha sido enviado.
+            $cd_categoria = $_GET['cd_categoria'] ?? null;
+            $ds_categoria = $_POST['ds_categoria'] ?? null;
+
+            // 2. Validação simples para garantir que não estão vazios
+            if (!empty($cd_categoria) && !empty($ds_categoria)) {
+                
+                // 3. Chama o método passando os dados do formulário
+                $atualizou = Categorias::update($cd_categoria, $ds_categoria);
+
+                // 4. Dá o feedback ao usuário
+                if ($atualizou) {
+                    // Sucesso! Pode redirecionar ou exibir mensagem
+                    echo "<div class='alert alert-success' role='alert'>A categoria foi atualizada com sucesso!</div>";
+                    // header("Location: lista_categorias.php"); exit;
+                } else {
+                    echo "<div class='alert alert-danger' role='alert'>Erro ao atualizar no banco de dados.</div>";
+                }
+                
+            } else {
+                echo "<div class='alert alert-danger' role='alert'>Por favor, preencha todos os campos corretamente.</div>";
+            }
+        } else {
+            echo "<div class='alert alert-info' role='alert'>Preencha os campos.</div>";
+        }
+
+/*
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $stmt = $pdo->prepare("SELECT ds_categoria FROM categorias WHERE cd_categoria = :cd_categoria;");
+        $stmt->execute(['cd_categoria' => $cd_categoria]);
+        $ds_categoria = $stmt->fetchColumn();
+        */

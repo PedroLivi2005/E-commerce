@@ -9,42 +9,60 @@ class Categorias {
     const TABLE                 = "categorias";
 	const ID                    = "cd_categoria";
 
-    public static function inserir($dados) {
-        try {
+    public function getObject($id){
+        try{
             TTransaction::open();
-            $conn = TTransaction::get();
-            
-            // Remove o ID do array caso tenha vindo do form (deixa o banco gerenciar o auto-increment)
-            if (isset($dados[self::ID])) {
-                unset($dados[self::ID]);
-            }
 
-            // Monta as colunas e os placeholders (ex: :ds_categoria, :fg_status) dinamicamente
-            $colunas = implode(', ', array_keys($dados));
-            $placeholders = ':' . implode(', :', array_keys($dados));
+            $sql = "SELECT * "
+                    . "FROM ".self::TABLE." "
+                    . "WHERE ".self::ID." = :id ";
             
-            // Monta a query final de INSERT
-            $sql = "INSERT INTO " . self::TABLE . " ($colunas) VALUES ($placeholders)";
+            $conn = TTransaction::get();
             $stmt = $conn->prepare($sql);
-            
-            // Faz o bind dinâmico dos valores, protegendo contra SQL Injection
-            foreach ($dados as $key => $value) {
-                $stmt->bindValue(':' . $key, $value);
-            }
-            
+
+            $stmt->bindParam(':id', $id);
             $stmt->execute();
-            
-            // Recupera o ID gerado pelo banco (útil caso precise usar depois)
-            $last_id = $conn->lastInsertId();
-            
-            TTransaction::close();
-            
-            return $last_id;
+
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+            unset($conn);
+
+            if(is_array($data)){
+                foreach($data as $key=>$campo){
+                    $this->$key = $campo;
+                }            
+            }
             
         } catch (Exception $ex) {
             
+        }
+    }
+
+    public function inserir() {
+        $colunas = null;
+        $valores = null;
+        try{
+            TTransaction::open();
+    
+            $sql = "INSERT INTO ".self::TABLE." (ds_categoria) values (:ds_categoria) ";            
+
+            $conn = TTransaction::get();
+            $stmt = $conn->prepare($sql);
+
+            $stmt->bindParam(':ds_categoria', $this->ds_categoria);
+
+            $stmt->execute();
+    
+            //fecha a transação aplicando todas as transações
+            TTransaction::close();
+    
+            return true;
+    
+        } catch (Exception $ex) {
+            //$usuario_erro =  $_SESSION['usuario']->cd_usuario." - ".$_SESSION['usuario']->nm_usuario;
+            //TTransaction::open();
+            //TTransaction::setLogger(new TLoggerXML($_SERVER['DOCUMENT_ROOT'].$_SESSION['parametro']->dir.'/gestor.log/logSistema.xml'));
             TTransaction::rollback();
-            
+    
             return false;
         }
     }
@@ -99,30 +117,30 @@ class Categorias {
 		}
 	}
 
-    static function update($cd_categoria, $ds_categoria) {
-        try {
+    public function update() {
+        $linhas = null;
 
+        try {
             TTransaction::open();
 
-            $sql = "UPDATE " . self::TABLE . " 
-                    SET ds_categoria = :ds_categoria 
-                    WHERE " . self::ID . " = :cd_categoria";
+            $sql = "UPDATE ".self::TABLE." SET ds_categoria = :ds_categoria WHERE ".self::ID." = :id";
 
             // Obtém a conexão
             $conn = TTransaction::get();
             $stmt = $conn->prepare($sql);
 
-            // Proteção contra SQL Injection (Bind dos parâmetros)
-            $stmt->bindValue(':ds_categoria', $ds_categoria, PDO::PARAM_STR);
-            $stmt->bindValue(':cd_categoria', $cd_categoria, PDO::PARAM_INT);
+            // $stmt->bindValue(':ds_categoria', $ds_categoria, PDO::PARAM_STR);
+            // $stmt->bindValue(':cd_categoria', $cd_categoria, PDO::PARAM_INT);
+            $stmt->bindParam(':ds_categoria', $this->ds_categoria);
+            $stmt->bindParam(':id', $this->cd_categoria);
 
             // Executa a instrução
-            $sucesso = $stmt->execute();
+            $stmt->execute();
 
             // Fecha a transação aplicando as mudanças no banco (Commit)
             TTransaction::close();
 
-            return $sucesso;
+            return true;
 
         } catch (Exception $ex) {
             // Desfaz as operações em caso de erro (Rollback)
@@ -132,4 +150,30 @@ class Categorias {
             return false;
         }
     }
+
+    static function delete($id) {
+        try{
+            TTransaction::open();
+
+            $sql = "UPDATE ".self::TABLE." SET fg_status = 'I' WHERE ".self::ID." = :id";
+
+            $conn = TTransaction::get();
+            $stmt = $conn->prepare($sql);
+
+            $stmt->bindParam(':id', $id);
+
+            $stmt->execute();
+
+            TTransaction::close();
+
+            return true;
+
+        } catch (Exception $ex) {
+
+            TTransaction::rollback();
+
+            return false;
+        }
+    }
+
 }

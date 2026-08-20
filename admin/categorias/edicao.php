@@ -1,14 +1,15 @@
 <?php
-    include('../includes/valida_sessao.php');
+    extract($_GET);
+    extract($_POST);
 
     spl_autoload_register(function ($classe) {
         if (file_exists("../classes/{$classe}.php")) {
             include_once "../classes/{$classe}.php";
         }
-        });
+    });
 
-    // $ds_categoria = null;
-    // extract($_POST);
+
+    include('../includes/valida_sessao.php');
 ?>
     <!-- inicio  -->
     <?php include '../includes/preheader.php'?>
@@ -20,42 +21,9 @@
     <?php
         $breadcrumb_item = 'Categorias';
         include '../includes/header.php';
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-            // 1. Captura os dados do array $_POST. 
-            // O operador '??' evita erros caso o campo não tenha sido enviado.
-            $cd_categoria = $_GET['cd_categoria'] ?? null;
-            $ds_categoria = $_POST['ds_categoria'] ?? null;
-
-            // 2. Validação simples para garantir que não estão vazios
-            if (!empty($cd_categoria) && !empty($ds_categoria)) {
-                
-                // 3. Chama o método passando os dados do formulário
-                $atualizou = Categorias::update($cd_categoria, $ds_categoria);
-
-                // 4. Dá o feedback ao usuário
-                if ($atualizou) {
-                    // Sucesso! Pode redirecionar ou exibir mensagem
-                    echo "<div class='alert alert-success' role='alert'>A categoria foi atualizada com sucesso!</div>";
-                    // header("Location: lista_categorias.php"); exit;
-                } else {
-                    echo "<div class='alert alert-danger' role='alert'>Erro ao atualizar no banco de dados.</div>";
-                }
-                
-            } else {
-                echo "<div class='alert alert-danger' role='alert'>Por favor, preencha todos os campos corretamente.</div>";
-            }
-        } else {
-            echo "<div class='alert alert-info' role='alert'>Preencha os campos.</div>";
-        }
         
-        /*
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $stmt = $pdo->prepare("SELECT ds_categoria FROM categorias WHERE cd_categoria = :cd_categoria;");
-        $stmt->execute(['cd_categoria' => $cd_categoria]);
-        $ds_categoria = $stmt->fetchColumn();
-        */
+        $categoria = new Categorias;
+        $categoria->getObject($cd_categoria);
     ?>
         <div class="body">
             <div class="container-lg px-4"><!-- Espaços na laterais -->     
@@ -72,16 +40,20 @@
                                         <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-1001">
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <form action="" method="post">
+                                                    <form action="categorias/categorias_man.php" name="edita" id="edita" method="post">
+                                                        <input type="hidden" name="evento" id="evento" value="salvar" />
+                                                        <input type="hidden" name="cd_categoria" id="cd_categoria" value="<?= $categoria->cd_categoria; ?>" />
                                                         <div class="row g-3">
                                                             <div class="col-10">
-                                                                <input class="form-control" type="text" placeholder="Nome da categoria" aria-label="default input example" name="ds_categoria" id="ds_categoria" value="" required>
+                                                                <input class="form-control" type="text" placeholder="Nome da categoria" aria-label="default input example" name="ds_categoria" id="ds_categoria" value="<?= $categoria->ds_categoria; ?>" required>
                                                             </div>
                                                             <div class="col-1">
-                                                                <input type="submit" class="btn btn-success" value="Salvar">
+                                                                <!-- <input type="submit" class="btn btn-success" value="Salvar"> -->
+                                                                <button type="button" class="btn btn-success" onclick="salvar()">Salvar</button>
                                                             </div>
                                                             <div class="col-1">
-                                                                <button type="button" class="btn btn-danger">Excluir</button>
+                                                                <!-- <button type="button" class="btn btn-danger">Excluir</button> -->
+                                                                <button type="button" class="btn btn-danger" onclick="excluir()">Excluir</button>
                                                             </div>
                                                         </div>
                                                     </form>
@@ -97,6 +69,21 @@
             </div>
         </div>
     </div>
+    <script>                
+        function salvar(){
+            if(document.edita.ds_categoria.value == '')
+                alert("O campo descric\u00e3o n\u00e3o pode ficar em branco!");                      
+            else
+                document.edita.submit();                    
+        }
+
+        function excluir(){
+            if(confirm("Deseja realmente excluir este registro?")){
+                document.edita.evento.value = 'excluir'; 
+                document.edita.submit(); 
+            }
+        }
+    </script>
     <?php include '../includes/plugins.php'?>
 </body>
 </html>

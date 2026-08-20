@@ -29,7 +29,7 @@ if(isset($evento)){
             $categoria = new Categorias();
             $categoria->ds_categoria = $ds_categoria;
             
-            if($categoria->inserir($categoria)){
+            if($categoria->inserir()){
                 $msg_tipo = 1;
                 $msg_texto = "Categoria inserida sucesso!";
                 header("location: index.php?msg_tipo=".$msg_tipo."&msg_texto=".$msg_texto);
@@ -44,26 +44,30 @@ if(isset($evento)){
             
         case 'salvar':
         
-            $categoria = new AquisicaoCategorias();
+            $categoria = new Categorias();
             $categoria->getObject($cd_categoria);
-            $categoria->descricao = $descricao;
+
+            // print($cd_categoria);
+            // print_r($categoria);
+            // exit;
+            $categoria->ds_categoria = $ds_categoria;
 
             if($categoria->update()){
                 $msg_tipo = 1;
                 $msg_texto = "Categoria alterada com sucesso!";
-                header("location: ".$retorno."?cd_categoria=".$cd_categoria."&msg_tipo=".$msg_tipo."&msg_texto=".$msg_texto);
+                header("location: index.php?cd_categoria=".$cd_categoria."&msg_tipo=".$msg_tipo."&msg_texto=".$msg_texto);
             }
             else{
                 $msg_tipo = 2;
                 $msg_texto = "Erro ao alterar a categoria!";
-                header("location: ".$retorno."?cd_categoria=".$cd_categoria."&msg_tipo=".$msg_tipo."&msg_texto=".$msg_texto);
+                header("location: index.php?cd_categoria=".$cd_categoria."&msg_tipo=".$msg_tipo."&msg_texto=".$msg_texto);
             }
         
             break;
             
         case 'excluir':
             
-            if(AquisicaoCategorias::delete($cd_categoria)){
+            if(Categorias::delete($cd_categoria)){
                 $msg_tipo = 1;
                 $msg_texto = "Categoria excluído com sucesso";
                 header("location: index.php?msg_tipo=".$msg_tipo."&msg_texto=".$msg_texto);
@@ -71,7 +75,7 @@ if(isset($evento)){
             else{
                 $msg_tipo = 2;
                 $msg_texto = "Erro ao excluir categoria. Entre em contato com o departamento de Tecnologia para maiores informações.";
-                header("location: ".$retorno."?msg_tipo=".$msg_tipo."&msg_texto=".$msg_texto."&cd_papel=".$cd_papel);
+                header("location: index.php?msg_tipo=".$msg_tipo."&msg_texto=".$msg_texto."&cd_papel=".$cd_papel);
             }            
             
             break;
