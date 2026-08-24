@@ -86,7 +86,7 @@
           </a>
           <ul class="nav-group-items compact">
             <li class="nav-item">
-              <a class="nav-link" href="produtos/index.php">
+              <a class="nav-link" href="subcategorias/index.php">
                 <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
                 Gerenciar Subcategorias
               </a>

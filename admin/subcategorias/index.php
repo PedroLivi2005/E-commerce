@@ -8,7 +8,7 @@
       }
     });
 
-    $ds_categoria = null;
+    $ds_subcategoria = null;
     extract($_POST);
 
     ?>
@@ -20,17 +20,17 @@
     <div class="wrapper d-flex flex-column min-vh-100">
 
     <?php
-      $breadcrumb_item = 'Produtos';
+      $breadcrumb_item = 'Subcategorias';
       include '../includes/header.php';
     ?>
     
     <div class="body">
-        <div class="container-lg px-4"><!-- Espaços na laterais -->     
+        <div class="container-lg px-4"><!-- Espaços na laterais -->
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header">
-                            <strong>Pesquisar Produtos</strong>
+                            <strong>Pesquisar Subcategoria</strong>
                             <span class="small ms-1"></span>
                         </div>
                         <div class="card-body"> 
@@ -39,10 +39,10 @@
                                     <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-1001">
                                         <div class="row">
                                             <div class="col-12">
-                                                <form action="produtos/index.php" method="post">
+                                                <form action="subcategorias/index.php" method="post">
                                                     <div class="row g-2">
                                                       <div class="col-10">
-                                                        <input class="form-control" type="text" placeholder="Nome da categoria" aria-label="Nome da categoria" name="ds_categoria" id="ds_categoria">
+                                                        <input class="form-control" type="text" placeholder="Nome da subcategoria" aria-label="Nome da subcategoria" name="ds_subcategoria" id="ds_subcategoria">
                                                       </div>
                                                       <div class="col-2">
                                                         <input type="submit" class="btn btn-success" value="Buscar">
@@ -62,7 +62,7 @@
                 <div class="box-body">
                     <div class="card mb-4">
                       <div class="card-header">
-                        <button type="button" class="btn btn-success margin pull-right" onclick="window.location = 'categorias/cadastro.php'">Inserir novo</button>
+                        <button type="button" class="btn btn-success margin pull-right" onclick="window.location = 'subcategorias/cadastro.php'">Inserir novo</button>
                       </div>
                       <div class="tab-content rounded-bottom">
                         <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-1005">
@@ -72,19 +72,19 @@
                                 <table class="table table-hover">
                                   <thead>
                                     <tr>
-                                      <th scope="col">Nome da Categoria</th>
+                                      <th scope="col">Nome da Subcategoria</th>
                                       <th scope="col">Editar</th>
                                     </tr>
                                   </thead>
                                   <tbody>
                                     <?php
-                                      $categorias = Categorias::listar($ds_categoria);
-                                      foreach ($categorias as $linha) {
+                                      $subcategorias = Subcategorias::listar($ds_subcategoria);
+                                      foreach ($subcategorias as $linha) {
                                     ?>
                                       <tr>
-                                        <td scope="row"><?php echo ucwords(strtolower($linha->ds_categoria)); ?></td>
+                                        <td scope="row"><?php echo ucwords(strtolower($linha->ds_subcategoria)); ?></td>
                                         <td>
-                                          <a class="btn btn-secondary btn-sm" href="categorias/edicao.php?cd_categoria=<?php echo $linha->cd_categoria; ?>">
+                                          <a class="btn btn-secondary btn-sm" href="subcategorias/edicao.php?cd_subcategoria=<?php echo $linha->cd_subcategoria; ?>">
                                             <i class="icon cil-color-border"></i>
                                           </a>
                                         </td>

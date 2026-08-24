@@ -81,6 +81,18 @@ INSERT INTO Categorias (
     'A'
 );
 
+INSERT INTO Subcategorias (ds_subcategoria, cd_categoria) VALUES ('Utensílio de limpeza', 1);
+
+INSERT INTO Subcategorias (ds_subcategoria, fg_status, cd_categoria) VALUES
+('Produtos Químicos', 'A', 1),
+('Ciclismo e Mobilidade', 'A', 2),
+('Ferramentas Manuais', 'A', 3),
+('Panelas', 'A', 4),
+('Notebooks', 'A', 5),
+('Periféricos', 'A', 5),
+('Computadores', 'A', 5),
+('Peças de Carro', 'A', 6);
+
 SELECT ds_categoria, fg_status FROM categorias;
 
 -- Em casa atualizar Categorias, Subcategorias, Usuarios
