@@ -9,6 +9,7 @@
     });
 
     $ds_subcategoria = null;
+    //$ds_categoria = null;
     extract($_POST);
 
     ?>
@@ -23,6 +24,10 @@
       $breadcrumb_item = 'Subcategorias';
       include '../includes/header.php';
     ?>
+    <!-- Inserir subcategoria (select)
+        editar subcategoria (select)
+        busca subcategoria (busca categoria)
+    -->
     
     <div class="body">
         <div class="container-lg px-4"><!-- Espaços na laterais -->
@@ -74,6 +79,7 @@
                                     <tr>
                                       <th scope="col">Nome da Subcategoria</th>
                                       <th scope="col">Editar</th>
+                                      <th scope="col">Categorias</th>
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -88,6 +94,7 @@
                                             <i class="icon cil-color-border"></i>
                                           </a>
                                         </td>
+                                        <td scope="row"><?php echo ucwords(strtolower($linha->ds_categoria ?? 'Sem Categoria')); ?></td>
                                       </tr>
                                       <?php
                                     }

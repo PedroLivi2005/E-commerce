@@ -6,6 +6,7 @@ class Subcategorias {
     public $ds_subcategoria;
     public $fg_status;
     public $cd_categoria;
+    public $ds_categoria;
 
     const TABLE                 = "subcategorias";
 	const ID                    = "cd_subcategoria";
@@ -78,8 +79,14 @@ class Subcategorias {
 
 			TTransaction::open();
 
-			$sql = "SELECT cd_subcategoria, ds_subcategoria, fg_status FROM " . self::TABLE." 
-				where fg_status ='A' 
+			$sql = "SELECT 
+                        subcategorias.cd_subcategoria, 
+                        subcategorias.ds_subcategoria, 
+                        subcategorias.fg_status, 
+                        categorias.ds_categoria 
+                    FROM " . self::TABLE." 
+                INNER JOIN categorias ON subcategorias.cd_categoria = categorias.cd_categoria 
+                WHERE subcategorias.fg_status ='A' 
 				$sql_ds_subcategoria ";
 
 			$conn = TTransaction::get();

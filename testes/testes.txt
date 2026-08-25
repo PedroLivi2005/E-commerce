@@ -235,3 +235,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute(['cd_categoria' => $cd_categoria]);
         $ds_categoria = $stmt->fetchColumn();
         */
+
+
+/*
+            $sql = "SELECT subcategorias.cd_subcategoria, subcategorias.ds_subcategoria, subcategorias.fg_status, categorias.ds_categoria 
+                FROM " . self::TABLE . " AS subcategorias
+                INNER JOIN categorias ON subcategorias.cd_categoria = categorias.cd_categoria
+                WHERE subcategorias.fg_status = 'A' ";*/
