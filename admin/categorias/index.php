@@ -72,7 +72,7 @@
                                 <table class="table table-hover">
                                   <thead>
                                     <tr>
-                                      <th scope="col">Nome da Categoria</th>
+                                      <th scope="col">Categoria</th>
                                       <th scope="col">Editar</th>
                                     </tr>
                                   </thead>

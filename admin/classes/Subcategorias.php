@@ -129,12 +129,13 @@ class Subcategorias {
         try {
             TTransaction::open();
 
-            $sql = "UPDATE ".self::TABLE." SET ds_subcategoria = :ds_subcategoria WHERE ".self::ID." = :id";
+            $sql = "UPDATE ".self::TABLE." SET ds_subcategoria = :ds_subcategoria, cd_categoria = :cd_categoria WHERE ".self::ID." = :id";
 
             // Obtém a conexão
             $conn = TTransaction::get();
             $stmt = $conn->prepare($sql);
 
+            $stmt->bindParam(':cd_categoria', $this->cd_categoria);
             $stmt->bindParam(':ds_subcategoria', $this->ds_subcategoria);
             $stmt->bindParam(':id', $this->cd_subcategoria);
 

@@ -28,11 +28,18 @@
                                                     <form action="categorias/categorias_man.php" name="novo" id="novo" method="post">
                                                         <input type="hidden" name="evento" id="evento" value="cadastrar" />
                                                         <div class="row g-3">
-                                                            <div class="col-10">
+                                                            <div class="col-6">
                                                                 <input class="form-control" type="text" placeholder="Nome da categoria" aria-label="default input example" name="ds_categoria" id="ds_categoria" required>
                                                             </div>
+                                                            <div class="col-4">
+                                                                <select class="form-select" aria-label="Default select example">
+                                                                    <option selected>Selecionar Categoria</option>
+                                                                    <option value="1">One</option>
+                                                                    <option value="2">Two</option>
+                                                                    <option value="3">Three</option>
+                                                                </select>
+                                                            </div>
                                                             <div class="col-2">
-                                                                <!-- <input type="submit" class="btn btn-success" value="Cadastrar"> -->
                                                                  <button type="button" class="btn btn-success" onclick="cadastrar()">Cadastrar</button>
                                                             </div>
                                                         </div>

@@ -8,20 +8,6 @@
 extract($_POST);
 extract($_GET);
 
-    // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    //     $dados_form = [
-    //         'ds_categoria' => $_POST['ds_categoria']
-    //     ];
-
-    //     // Chama o método estático passando os dados
-    //     $resultado = Categorias::inserir($dados_form);
-        
-    //     if ($resultado) {
-    //         header("Location: cadastro.php");
-    //         exit;
-    //     }
-    // }
-
 if(isset($evento)){
     switch($evento){
         case 'cadastrar':
@@ -44,23 +30,24 @@ if(isset($evento)){
             
         case 'salvar':
         
-            $categoria = new Categorias();
-            $categoria->getObject($cd_categoria);
+            $subcategoria = new Subcategorias();
+            $subcategoria->getObject($cd_subcategoria);
 
-            // print($cd_categoria);
-            // print_r($categoria);
+            // print($cd_subcategoria);
+            // print_r($subcategoria);
             // exit;
-            $categoria->ds_categoria = $ds_categoria;
+            $subcategoria->ds_subcategoria = $ds_subcategoria;
+            $subcategoria->cd_categoria = $cd_categoria;
 
-            if($categoria->update()){
+            if($subcategoria->update()){
                 $msg_tipo = 1;
-                $msg_texto = "Categoria alterada com sucesso!";
-                header("location: index.php?cd_categoria=".$cd_categoria."&msg_tipo=".$msg_tipo."&msg_texto=".$msg_texto);
+                $msg_texto = "Subcategoria alterada com sucesso!";
+                header("location: index.php?cd_subcategoria=".$cd_subcategoria."&msg_tipo=".$msg_tipo."&msg_texto=".$msg_texto);
             }
             else{
                 $msg_tipo = 2;
-                $msg_texto = "Erro ao alterar a categoria!";
-                header("location: index.php?cd_categoria=".$cd_categoria."&msg_tipo=".$msg_tipo."&msg_texto=".$msg_texto);
+                $msg_texto = "Erro ao alterar a subcategoria!";
+                header("location: index.php?cd_subcategoria=".$cd_subcategoria."&msg_tipo=".$msg_tipo."&msg_texto=".$msg_texto);
             }
         
             break;

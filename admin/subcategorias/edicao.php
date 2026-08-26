@@ -40,12 +40,24 @@
                                         <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-1001">
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <form action="subategorias/subategorias_man.php" name="edita" id="edita" method="post">
+                                                    <form action="subcategorias/subcategorias_man.php" name="edita" id="edita" method="post">
                                                         <input type="hidden" name="evento" id="evento" value="salvar" />
                                                         <input type="hidden" name="cd_subcategoria" id="cd_subcategoria" value="<?= $subcategoria->cd_subcategoria; ?>" />
                                                         <div class="row g-3">
-                                                            <div class="col-10">
+                                                            <div class="col-8">
                                                                 <input class="form-control" type="text" placeholder="Nome da subategoria" aria-label="default input example" name="ds_subcategoria" id="ds_subcategoria" value="<?= $subcategoria->ds_subcategoria; ?>" required>
+                                                            </div>
+                                                            <div class="col-2">
+                                                                <select class="form-select" aria-label="Default select example">
+                                                                    <?php
+                                                                        $categorias = Categorias::listar($ds_categoria);
+                                                                        foreach ($categorias as $linha) {
+                                                                        ?>
+                                                                        <option value="<?php echo $linha->cd_categoria; ?>"><?php echo ucwords(strtolower($linha->ds_categoria)); ?></option>
+                                                                    <?php
+                                                                        }
+                                                                    ?>
+                                                                </select>
                                                             </div>
                                                             <div class="col-1">
                                                                 <button type="button" class="btn btn-success" onclick="salvar()">Salvar</button>

@@ -27,6 +27,7 @@
     <!-- Inserir subcategoria (select)
         editar subcategoria (select)
         busca subcategoria (busca categoria)
+        erro ao não encontrar resultado
     -->
     
     <div class="body">
@@ -77,7 +78,7 @@
                                 <table class="table table-hover">
                                   <thead>
                                     <tr>
-                                      <th scope="col">Nome da Subcategoria</th>
+                                      <th scope="col">Subcategoria</th>
                                       <th scope="col">Editar</th>
                                       <th scope="col">Categorias</th>
                                     </tr>
