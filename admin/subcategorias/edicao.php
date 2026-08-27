@@ -48,12 +48,13 @@
                                                                 <input class="form-control" type="text" placeholder="Nome da subategoria" aria-label="default input example" name="ds_subcategoria" id="ds_subcategoria" value="<?= $subcategoria->ds_subcategoria; ?>" required>
                                                             </div>
                                                             <div class="col-2">
-                                                                <select class="form-select" aria-label="Default select example">
+                                                                <select class="form-select" aria-label="Default select example" name="cd_categoria" id="cd_categoria">
                                                                     <?php
                                                                         $categorias = Categorias::listar($ds_categoria);
                                                                         foreach ($categorias as $linha) {
+                                                                            $selected = ($linha->cd_categoria == $subcategoria->cd_categoria) ? 'selected' : '';
                                                                         ?>
-                                                                        <option value="<?php echo $linha->cd_categoria; ?>"><?php echo ucwords(strtolower($linha->ds_categoria)); ?></option>
+                                                                        <option value="<?php echo $linha->cd_categoria; ?>" <?= $selected; ?>><?php echo ucwords(strtolower($linha->ds_categoria)); ?></option>
                                                                     <?php
                                                                         }
                                                                     ?>
