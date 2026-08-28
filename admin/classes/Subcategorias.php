@@ -50,6 +50,7 @@ class Subcategorias {
             $conn = TTransaction::get();
             $stmt = $conn->prepare($sql);
 
+            $stmt->bindParam(':cd_categoria', $this->cd_categoria);
             $stmt->bindParam(':ds_subcategoria', $this->ds_subcategoria);
 
             $stmt->execute();

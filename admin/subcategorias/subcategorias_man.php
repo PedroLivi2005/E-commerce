@@ -12,17 +12,21 @@ if(isset($evento)){
     switch($evento){
         case 'cadastrar':
             
-            $categoria = new Categorias();
-            $categoria->ds_categoria = $ds_categoria;
+            $subcategoria = new Subcategorias();
+
+            // print_r($subcategoria);
+            // exit;
+            $subcategoria->ds_subcategoria = $ds_subcategoria;
+            $subcategoria->cd_categoria = $cd_categoria;
             
-            if($categoria->inserir()){
+            if($subcategoria->inserir()){
                 $msg_tipo = 1;
-                $msg_texto = "Categoria inserida sucesso!";
+                $msg_texto = "Subcategoria inserida sucesso!";
                 header("location: index.php?msg_tipo=".$msg_tipo."&msg_texto=".$msg_texto);
             }
             else{
                 $msg_tipo = 2;
-                $msg_texto = "Erro ao inserir a categoria!";
+                $msg_texto = "Erro ao inserir a subcategoria!";
                 header("location: index.php?msg_tipo=".$msg_tipo."&msg_texto=".$msg_texto);
             }
             
@@ -54,14 +58,14 @@ if(isset($evento)){
             
         case 'excluir':
             
-            if(Categorias::delete($cd_categoria)){
+            if(Subcategorias::delete($cd_subcategoria)){
                 $msg_tipo = 1;
-                $msg_texto = "Categoria excluído com sucesso";
+                $msg_texto = "Subcategoria excluído com sucesso";
                 header("location: index.php?msg_tipo=".$msg_tipo."&msg_texto=".$msg_texto);
             }
             else{
                 $msg_tipo = 2;
-                $msg_texto = "Erro ao excluir categoria. Entre em contato com o departamento de Tecnologia para maiores informações.";
+                $msg_texto = "Erro ao excluir subcategoria.";
                 header("location: index.php?msg_tipo=".$msg_tipo."&msg_texto=".$msg_texto."&cd_papel=".$cd_papel);
             }            
             
