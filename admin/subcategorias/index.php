@@ -1,5 +1,4 @@
 <?php
-
     include('../includes/valida_sessao.php');
 
     spl_autoload_register(function ($classe) {
