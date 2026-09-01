@@ -46,11 +46,14 @@
                                             <div class="col-12">
                                                 <form action="subcategorias/index.php" method="post">
                                                     <div class="row g-2">
-                                                      <div class="col-10">
+                                                      <div class="col-9">
                                                         <input class="form-control" type="text" placeholder="Nome da subcategoria" aria-label="Nome da subcategoria" name="ds_subcategoria" id="ds_subcategoria">
                                                       </div>
-                                                      <div class="col-2">
+                                                      <div class="col-1">
                                                         <input type="submit" class="btn btn-success" value="Buscar">
+                                                      </div>
+                                                      <div class="col-2">
+                                                        <button onclick="window.location = 'index.php';" class="btn btn-success">Limpar pesquisa</button>
                                                       </div>
                                                     </div>
                                                 </form>
@@ -78,26 +81,33 @@
                                   <thead>
                                     <tr>
                                       <th scope="col">Subcategoria</th>
-                                      <th scope="col">Editar</th>
                                       <th scope="col">Categorias</th>
+                                      <th scope="col">Editar</th>
                                     </tr>
                                   </thead>
                                   <tbody>
                                     <?php
                                       $subcategorias = Subcategorias::listar($ds_subcategoria);
+                                      if ($subcategorias == null){
+                                        echo "<div class='alert alert-secondary' role='alert'>
+                                                <p class='mb-0'>Nenhum resultado encontrado.</p>  
+                                              </div>";
+                                      } else {
                                       foreach ($subcategorias as $linha) {
                                     ?>
                                       <tr>
                                         <td scope="row"><?php echo ucwords(strtolower($linha->ds_subcategoria)); ?></td>
+                                        <td scope="row"><?php echo ucwords(strtolower($linha->ds_categoria ?? 'Sem Categoria')); ?></td>
                                         <td>
                                           <a class="btn btn-secondary btn-sm" href="subcategorias/edicao.php?cd_subcategoria=<?php echo $linha->cd_subcategoria; ?>">
                                             <i class="icon cil-color-border"></i>
                                           </a>
                                         </td>
-                                        <td scope="row"><?php echo ucwords(strtolower($linha->ds_categoria ?? 'Sem Categoria')); ?></td>
                                       </tr>
                                       <?php
                                     }
+                                    }
+                                    //var_dump($subcategorias);
                                     ?>
                                   </tbody>
                                 </table>

@@ -41,11 +41,14 @@
                                             <div class="col-12">
                                                 <form action="categorias/index.php" method="post">
                                                     <div class="row g-2">
-                                                      <div class="col-10">
+                                                      <div class="col-9">
                                                         <input class="form-control" type="text" placeholder="Nome da categoria" aria-label="Nome da categoria" name="ds_categoria" id="ds_categoria">
                                                       </div>
-                                                      <div class="col-2">
+                                                      <div class="col-1">
                                                         <input type="submit" class="btn btn-success" value="Buscar">
+                                                      </div>
+                                                      <div class="col-2">
+                                                        <button onclick="window.location = 'index.php';" class="btn btn-success">Limpar pesquisa</button>
                                                       </div>
                                                     </div>
                                                 </form>
@@ -79,6 +82,11 @@
                                   <tbody>
                                     <?php
                                       $categorias = Categorias::listar($ds_categoria);
+                                      if ($categorias == null){
+                                        echo "<div class='alert alert-secondary' role='alert'>
+                                                <p class='mb-0'>Nenhum resultado encontrado.</p>  
+                                              </div>";
+                                      } else {
                                       foreach ($categorias as $linha) {
                                     ?>
                                       <tr>
@@ -90,6 +98,7 @@
                                         </td>
                                       </tr>
                                       <?php
+                                    }
                                     }
                                     ?>
                                   </tbody>
