@@ -84,7 +84,8 @@ class Subcategorias {
                         subcategorias.cd_subcategoria, 
                         subcategorias.ds_subcategoria, 
                         subcategorias.fg_status, 
-                        categorias.ds_categoria 
+                        categorias.ds_categoria,
+                        categorias.cd_categoria 
                     FROM " . self::TABLE." 
                 INNER JOIN categorias ON subcategorias.cd_categoria = categorias.cd_categoria 
                 WHERE subcategorias.fg_status ='A' 

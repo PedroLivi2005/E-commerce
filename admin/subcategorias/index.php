@@ -46,9 +46,25 @@
                                             <div class="col-12">
                                                 <form action="subcategorias/index.php" method="post">
                                                     <div class="row g-2">
-                                                      <div class="col-9">
+                                                      <div class="col-7">
                                                         <input class="form-control" type="text" placeholder="Nome da subcategoria" aria-label="Nome da subcategoria" name="ds_subcategoria" id="ds_subcategoria">
                                                       </div>
+                                                      <div class="col-2">
+
+                                                          <select class="form-select" aria-label="Default select example" name="cd_categoria" id="cd_categoria">
+                                                              <option selected value="0">Selecionar</option>
+                                                              <?php
+                                                                  $categorias = Categorias::listar($ds_categoria);
+                                                                  foreach ($categorias as $linha) {
+                                                                      $selected = ($linha->cd_categoria == $subcategoria->cd_categoria) ? 'selected' : '';
+                                                                  ?>
+                                                                  <option value="<?php echo $linha->cd_categoria; ?>" <?= $selected; ?>><?php echo ucwords(strtolower($linha->ds_categoria)); ?></option>
+                                                              <?php
+                                                                  }
+                                                              ?>
+                                                          </select>
+
+                                                        </div>
                                                       <div class="col-1">
                                                         <input type="submit" class="btn btn-success" value="Buscar">
                                                       </div>
@@ -107,7 +123,7 @@
                                       <?php
                                     }
                                     }
-                                    //var_dump($subcategorias);
+                                    //var_dump($cd_categoria);
                                     ?>
                                   </tbody>
                                 </table>
