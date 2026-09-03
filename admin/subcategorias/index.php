@@ -1,4 +1,6 @@
 <?php
+  ini_set('display_errors', 'off');
+error_reporting(E_ALL | E_STRICT);
     include('../includes/valida_sessao.php');
 
     spl_autoload_register(function ($classe) {
@@ -23,12 +25,6 @@
       $breadcrumb_item = 'Subcategorias';
       include '../includes/header.php';
     ?>
-    <!-- Inserir subcategoria (select)
-        editar subcategoria (select)
-        busca subcategoria (busca categoria)
-        erro ao não encontrar resultado
-    -->
-    
     <div class="body">
         <div class="container-lg px-4"><!-- Espaços na laterais -->
             <div class="row">
@@ -46,13 +42,12 @@
                                             <div class="col-12">
                                                 <form action="subcategorias/index.php" method="post">
                                                     <div class="row g-2">
-                                                      <div class="col-7">
+                                                      <div class="col-6">
                                                         <input class="form-control" type="text" placeholder="Nome da subcategoria" aria-label="Nome da subcategoria" name="ds_subcategoria" id="ds_subcategoria">
                                                       </div>
-                                                      <div class="col-2">
-
+                                                      <div class="col-3">
                                                           <select class="form-select" aria-label="Default select example" name="cd_categoria" id="cd_categoria">
-                                                              <option selected value="0">Selecionar</option>
+                                                              <option selected value="0">Selecione a categoria</option>
                                                               <?php
                                                                   $categorias = Categorias::listar($ds_categoria);
                                                                   foreach ($categorias as $linha) {
@@ -63,7 +58,6 @@
                                                                   }
                                                               ?>
                                                           </select>
-
                                                         </div>
                                                       <div class="col-1">
                                                         <input type="submit" class="btn btn-success" value="Buscar">
@@ -103,7 +97,7 @@
                                   </thead>
                                   <tbody>
                                     <?php
-                                      $subcategorias = Subcategorias::listar($ds_subcategoria);
+                                      $subcategorias = Subcategorias::listar($ds_subcategoria, $cd_categoria);
                                       if ($subcategorias == null){
                                         echo "<div class='alert alert-secondary' role='alert'>
                                                 <p class='mb-0'>Nenhum resultado encontrado.</p>  
@@ -113,7 +107,7 @@
                                     ?>
                                       <tr>
                                         <td scope="row"><?php echo ucwords(strtolower($linha->ds_subcategoria)); ?></td>
-                                        <td scope="row"><?php echo ucwords(strtolower($linha->ds_categoria ?? 'Sem Categoria')); ?></td>
+                                        <td scope="row"><?php echo ucwords(strtolower($linha->ds_categoria ?? 'Não cadastrado')); ?></td>
                                         <td>
                                           <a class="btn btn-secondary btn-sm" href="subcategorias/edicao.php?cd_subcategoria=<?php echo $linha->cd_subcategoria; ?>">
                                             <i class="icon cil-color-border"></i>

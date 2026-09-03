@@ -1,15 +1,19 @@
 <?php
 
-class Subcategorias {
+class Produtos {
 
-    public $cd_subcategoria;
-    public $ds_subcategoria;
+    public $cd_produto;
+    public $nm_produto;
+    public $vl_produto;
+    public $vl_promocao;
+    public $dt_validade_promocao;
+    public $ds_produto;
+    public $ds_ficha_tecnica;
     public $fg_status;
-    public $cd_categoria;
-    public $ds_categoria;
+    public $cd_subcategoria;
 
-    const TABLE                 = "subcategorias";
-	const ID                    = "cd_subcategoria";
+    const TABLE                 = "produtos";
+	const ID                    = "cd_produto";
 
     public function getObject($id){
         try{
@@ -68,35 +72,39 @@ class Subcategorias {
         }
     }
 
-	static function listar($ds_subcategoria = null, $cd_categoria = null) {
+	static function listar($nm_produto = null, $cd_subcategoria = null) {
 
 		try{
 
-			$sql_ds_subcategoria = null;
+			$sql_nm_produto = null;
 
-			if($ds_subcategoria != null){
-				$sql_ds_subcategoria = " and ds_subcategoria like '%".$ds_subcategoria."%' ";
+			if($nm_produto != null){
+				$sql_nm_produto = " and nm_produto like '%".$nm_produto."%' ";
 			}
 
-            $sql_cd_categoria = null;
+            $sql_cd_subcategoria = null;
 
-			if($cd_categoria > 0){
-				$sql_cd_categoria = " and categorias.cd_categoria = $cd_categoria ";
+			if($cd_subcategoria > 0){
+				$sql_cd_subcategoria = " and subcategorias.cd_subcategoria = $cd_subcategoria ";
 			}            
 
 			TTransaction::open();
 
 			$sql = "SELECT 
-                        subcategorias.cd_subcategoria, 
-                        subcategorias.ds_subcategoria, 
-                        subcategorias.fg_status, 
-                        categorias.ds_categoria,
-                        categorias.cd_categoria 
+                        produtos.cd_produto, 
+                        produtos.nm_produto, 
+                        produtos.vl_produto, 
+                        produtos.vl_promocao, 
+                        produtos.dt_validade_promocao, 
+                        produtos.ds_produto, 
+                        produtos.ds_ficha_tecnica, 
+                        produtos.fg_status, 
+                        produtos.cd_subcategoria 
                     FROM " . self::TABLE." 
-                INNER JOIN categorias ON subcategorias.cd_categoria = categorias.cd_categoria 
-                WHERE subcategorias.fg_status ='A' 
-				$sql_ds_subcategoria 
-                $sql_cd_categoria";
+                INNER JOIN subcategorias ON produtos.cd_subcategoria = subcategorias.cd_subcategoria 
+                WHERE produtos.fg_status ='A' 
+				$sql_nm_produto 
+                $sql_cd_subcategoria";
 
 			$conn = TTransaction::get();
 
@@ -107,7 +115,7 @@ class Subcategorias {
 
 			if ($result) {
 				foreach ($result as $data) {
-					$objeto = new Subcategorias();
+					$objeto = new Produtos();
 
 					foreach ($data as $key => $campo) {
 						$objeto->$key = $campo;

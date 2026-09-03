@@ -1,5 +1,6 @@
 <?php
-
+  ini_set('display_errors', 'off');
+error_reporting(E_ALL | E_STRICT);
     include('../includes/valida_sessao.php');
 
     spl_autoload_register(function ($classe) {
@@ -8,7 +9,9 @@
       }
     });
 
-    $ds_categoria = null;
+    $nm_produto = null;
+    //$ds_subcategoria = null;
+    //$ds_categoria = null;
     extract($_POST);
 
     ?>
@@ -23,9 +26,8 @@
       $breadcrumb_item = 'Produtos';
       include '../includes/header.php';
     ?>
-    
     <div class="body">
-        <div class="container-lg px-4"><!-- Espaços na laterais -->     
+        <div class="container-lg px-4"><!-- Espaços na laterais -->
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-4">
@@ -41,11 +43,21 @@
                                             <div class="col-12">
                                                 <form action="produtos/index.php" method="post">
                                                     <div class="row g-2">
-                                                      <div class="col-10">
-                                                        <input class="form-control" type="text" placeholder="Nome da categoria" aria-label="Nome da categoria" name="ds_categoria" id="ds_categoria">
+
+                                                      <div class="col-6">
+                                                        <input class="form-control" type="text" placeholder="Nome da produto" aria-label="Nome do produto" name="nm_produto" id="nm_produto">
+                                                      </div>
+
+                                                      <div class="col-3">
+
+                                                          
+
+                                                        </div>
+                                                      <div class="col-1">
+                                                        <input type="submit" class="btn btn-success" value="Buscar">
                                                       </div>
                                                       <div class="col-2">
-                                                        <input type="submit" class="btn btn-success" value="Buscar">
+                                                        <button onclick="window.location = 'index.php';" class="btn btn-success">Limpar pesquisa</button>
                                                       </div>
                                                     </div>
                                                 </form>
@@ -62,7 +74,7 @@
                 <div class="box-body">
                     <div class="card mb-4">
                       <div class="card-header">
-                        <button type="button" class="btn btn-success margin pull-right" onclick="window.location = 'categorias/cadastro.php'">Inserir novo</button>
+                        <button type="button" class="btn btn-success margin pull-right" onclick="window.location = 'produtos/cadastro.php'">Inserir novo</button>
                       </div>
                       <div class="tab-content rounded-bottom">
                         <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-1005">
@@ -72,25 +84,34 @@
                                 <table class="table table-hover">
                                   <thead>
                                     <tr>
-                                      <th scope="col">Nome da Categoria</th>
+                                      <th scope="col">Produtos</th>
+                                      <th scope="col">Subcategorias</th>
                                       <th scope="col">Editar</th>
                                     </tr>
                                   </thead>
                                   <tbody>
                                     <?php
-                                      $categorias = Categorias::listar($ds_categoria);
-                                      foreach ($categorias as $linha) {
+                                      $produtos = Produtos::listar($nm_produto, $cd_subcategoria);
+                                      if ($produtos == null){
+                                        echo "<div class='alert alert-secondary' role='alert'>
+                                                <p class='mb-0'>Nenhum resultado encontrado.</p>  
+                                              </div>";
+                                      } else {
+                                      foreach ($produtos as $linha) {
                                     ?>
                                       <tr>
-                                        <td scope="row"><?php echo ucwords(strtolower($linha->ds_categoria)); ?></td>
+                                        <td scope="row"><?php echo ucwords(strtolower($linha->nm_produto)); ?></td>
+                                        <td scope="row"><?php echo ucwords(strtolower($linha->ds_subcategoria ?? 'Não cadastrado')); ?></td>
                                         <td>
-                                          <a class="btn btn-secondary btn-sm" href="categorias/edicao.php?cd_categoria=<?php echo $linha->cd_categoria; ?>">
+                                          <a class="btn btn-secondary btn-sm" href="produtos/edicao.php?cd_produto=<?php echo $linha->cd_produto; ?>">
                                             <i class="icon cil-color-border"></i>
                                           </a>
                                         </td>
                                       </tr>
                                       <?php
                                     }
+                                    }
+                                    //var_dump($cd_categoria);
                                     ?>
                                   </tbody>
                                 </table>
