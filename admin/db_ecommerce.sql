@@ -95,6 +95,49 @@ INSERT INTO Subcategorias (ds_subcategoria, fg_status, cd_categoria) VALUES
 
 SELECT ds_categoria, fg_status FROM categorias;
 
+-- Atenção
 -- Em casa atualizar Categorias, Subcategorias, Usuarios
 ALTER TABLE Categorias 
 MODIFY COLUMN fg_status CHAR(1) NOT NULL DEFAULT 'A';
+
+
+INSERT INTO Produtos (
+    nm_produto,
+    vl_produto,
+    vl_promocao,
+    dt_validade_promocao,
+    ds_produto,
+    ds_ficha_tecnica,
+    fg_status,
+    cd_subcategoria
+) VALUES 
+(
+    'Teclado Mecânico RGB',
+    350.00,
+    289.90,
+    '2026-10-31',
+    'Teclado mecânico com switches azuis e retroiluminação RGB personalizável.',
+    'Switch: Outemu Blue; Conexão: USB 2.0; Comprimento do cabo: 1.8m; PBT Double Shot.',
+    'A',
+    7
+),
+(
+    'Mouse Gamer Sem Fio',
+    199.90,
+    NULL,
+    NULL,
+    'Mouse ergonômico sem fio com sensor de alta precisão de até 16000 DPI.',
+    'DPI: 100-16000; Bateria: até 70h; Peso: 85g; Conexão: 2.4GHz / Bluetooth.',
+    'A',
+    7
+),
+(
+    'Monitor 24" IPS 144Hz',
+    899.00,
+    799.00,
+    '2026-11-15',
+    'Monitor gamer Full HD com taxa de atualização de 144Hz e tempo de resposta de 1ms.',
+    'Resolução: 1920x1080; Painel: IPS; Taxa de Atualização: 144Hz; Conexões: HDMI, DisplayPort.',
+    'A',
+    14
+);

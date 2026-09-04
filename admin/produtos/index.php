@@ -1,6 +1,6 @@
 <?php
   ini_set('display_errors', 'off');
-error_reporting(E_ALL | E_STRICT);
+  error_reporting(E_ALL | E_STRICT);
     include('../includes/valida_sessao.php');
 
     spl_autoload_register(function ($classe) {
@@ -43,16 +43,25 @@ error_reporting(E_ALL | E_STRICT);
                                             <div class="col-12">
                                                 <form action="produtos/index.php" method="post">
                                                     <div class="row g-2">
-
                                                       <div class="col-6">
                                                         <input class="form-control" type="text" placeholder="Nome da produto" aria-label="Nome do produto" name="nm_produto" id="nm_produto">
                                                       </div>
-
                                                       <div class="col-3">
 
+                                                        <select class="form-select" aria-label="Default select example" name="cd_subcategoria" id="cd_subcategoria">
+                                                              <option selected value="0">Selecione a subcategoria</option>
+                                                              <?php
+                                                                  $subcategorias = Subcategorias::listar($ds_subcategoria);
+                                                                  foreach ($subcategorias as $linha) {
+                                                                      $selected = ($linha->cd_subcategoria == $produto->cd_subcategoria) ? 'selected' : '';
+                                                                  ?>
+                                                                  <option value="<?php echo $linha->cd_subcategoria; ?>" <?= $selected; ?>><?php echo ucwords(strtolower($linha->ds_subcategoria)); ?></option>
+                                                              <?php
+                                                                  }
+                                                              ?>
+                                                          </select>
                                                           
-
-                                                        </div>
+                                                      </div>
                                                       <div class="col-1">
                                                         <input type="submit" class="btn btn-success" value="Buscar">
                                                       </div>
@@ -111,7 +120,6 @@ error_reporting(E_ALL | E_STRICT);
                                       <?php
                                     }
                                     }
-                                    //var_dump($cd_categoria);
                                     ?>
                                   </tbody>
                                 </table>

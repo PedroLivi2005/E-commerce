@@ -99,7 +99,8 @@ class Produtos {
                         produtos.ds_produto, 
                         produtos.ds_ficha_tecnica, 
                         produtos.fg_status, 
-                        produtos.cd_subcategoria 
+                        subcategorias.ds_subcategoria, 
+                        subcategorias.cd_subcategoria 
                     FROM " . self::TABLE." 
                 INNER JOIN subcategorias ON produtos.cd_subcategoria = subcategorias.cd_subcategoria 
                 WHERE produtos.fg_status ='A' 

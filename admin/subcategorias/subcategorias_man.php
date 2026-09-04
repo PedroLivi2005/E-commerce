@@ -26,7 +26,7 @@ if(isset($evento)){
             }
             else{
                 $msg_tipo = 2;
-                $msg_texto = "Erro ao inserir a subcategoria!";
+                $msg_texto = "Erro ao inserir subcategoria!";
                 header("location: index.php?msg_tipo=".$msg_tipo."&msg_texto=".$msg_texto);
             }
             
@@ -50,7 +50,7 @@ if(isset($evento)){
             }
             else{
                 $msg_tipo = 2;
-                $msg_texto = "Erro ao alterar a subcategoria!";
+                $msg_texto = "Erro ao alterar subcategoria!";
                 header("location: index.php?cd_subcategoria=".$cd_subcategoria."&msg_tipo=".$msg_tipo."&msg_texto=".$msg_texto);
             }
         

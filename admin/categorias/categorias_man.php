@@ -36,7 +36,7 @@ if(isset($evento)){
             }
             else{
                 $msg_tipo = 2;
-                $msg_texto = "Erro ao inserir a categoria!";
+                $msg_texto = "Erro ao inserir categoria!";
                 header("location: index.php?msg_tipo=".$msg_tipo."&msg_texto=".$msg_texto);
             }
             
@@ -59,7 +59,7 @@ if(isset($evento)){
             }
             else{
                 $msg_tipo = 2;
-                $msg_texto = "Erro ao alterar a categoria!";
+                $msg_texto = "Erro ao alterar categoria!";
                 header("location: index.php?cd_categoria=".$cd_categoria."&msg_tipo=".$msg_tipo."&msg_texto=".$msg_texto);
             }
         
@@ -74,7 +74,7 @@ if(isset($evento)){
             }
             else{
                 $msg_tipo = 2;
-                $msg_texto = "Erro ao excluir categoria. Entre em contato com o departamento de Tecnologia para maiores informações.";
+                $msg_texto = "Erro ao excluir categoria.";
                 header("location: index.php?msg_tipo=".$msg_tipo."&msg_texto=".$msg_texto."&cd_papel=".$cd_papel);
             }            
             
