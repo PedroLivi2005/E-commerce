@@ -46,7 +46,7 @@ if(isset($evento)){
             if($produto->update()){
                 $msg_tipo = 1;
                 $msg_texto = "Produto alterado com sucesso!";
-                header("location: index.php?cd_subcategoria=".$cd_produto."&msg_tipo=".$msg_tipo."&msg_texto=".$msg_texto);
+                header("location: index.php?cd_produto=".$cd_produto."&msg_tipo=".$msg_tipo."&msg_texto=".$msg_texto);
             }
             else{
                 $msg_tipo = 2;

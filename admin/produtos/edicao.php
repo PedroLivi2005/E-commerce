@@ -22,8 +22,8 @@
         $breadcrumb_item = 'Produtos';
         include '../includes/header.php';
         
-        $subcategoria = new Produtos;
-        $subcategoria->getObject($cd_produto);
+        $produto = new Produtos;
+        $produto->getObject($cd_produto);
     ?>
         <div class="body">
             <div class="container-lg px-4"><!-- Espaços na laterais -->     
@@ -40,23 +40,27 @@
                                         <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-1001">
                                             <div class="row">
                                                 <div class="col-12">
-
+                                                    <!-- $vl_produto;v
+                                                         $vl_promocao;v
+                                                         $dt_validade_promocao;v
+                                                         $ds_produto;v
+                                                         $ds_ficha_tecnica; -->
                                                     <form action="produtos/produtos_man.php" name="edita" id="edita" method="post">
                                                         <input type="hidden" name="evento" id="evento" value="salvar" />
                                                         <input type="hidden" name="cd_produto" id="cd_produto" value="<?= $produto->cd_produto; ?>" />
 
-                                                        <div class="row g-3">
+                                                        <div class="row g-4">
                                                             <div class="col-8">
+                                                                <label for="nm_produto">Nome do produto</label>
                                                                 <input class="form-control" type="text" placeholder="Nome do produto" aria-label="default input example" name="nm_produto" id="nm_produto" value="<?= $produto->nm_produto; ?>" required>
                                                             </div>
 
                                                             <div class="col-2">
-
                                                                 <select class="form-select" aria-label="Default select example" name="cd_subcategoria" id="cd_subcategoria">
                                                                     <?php
                                                                         $subcategorias = Subcategorias::listar($ds_subcategoria);
                                                                         foreach ($subcategorias as $linha) {
-                                                                            $selected = ($linha->cd_subcategoria == $subcategoria->cd_subcategoria) ? 'selected' : '';
+                                                                            $selected = ($linha->cd_subcategoria == $produto->cd_subcategoria) ? 'selected' : '';
                                                                         ?>
                                                                         <option value="<?php echo $linha->cd_subcategoria; ?>" <?= $selected; ?>><?php echo ucwords(strtolower($linha->ds_subcategoria)); ?></option>
                                                                     <?php
@@ -69,6 +73,29 @@
                                                             </div>
                                                             <div class="col-1">
                                                                 <button type="button" class="btn btn-danger" onclick="excluir()">Excluir</button>
+                                                            </div>
+                                                        
+                                                            <div class="col-4">
+                                                                <label for="vl_produto">Valor do produto</label>
+                                                                <input class="form-control" type="text" placeholder="Valor do produto" aria-label="default input example" name="vl_produto" id="vl_produto" value="<?= $produto->vl_produto; ?>" required>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <label for="vl_promocao">Valor da promoção</label>
+                                                                <input class="form-control" type="text" placeholder="Valor da promoção" aria-label="default input example" name="vl_promocao" id="vl_promocao" value="<?= $produto->vl_promocao; ?>" required>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <label for="dt_validade_promocao">Validade da promocão</label>
+                                                                <input class="form-control" type="text" placeholder="Validade da promocão" aria-label="default input example" name="dt_validade_promocao" id="dt_validade_promocao" value="<?= $produto->dt_validade_promocao; ?>" required>
+                                                            </div>
+                                                        
+                                                            <div class="col-12">
+                                                                <label for="ds_produto">Descrição do produto</label>
+                                                                <input class="form-control" type="text" placeholder="Descrição do produto" aria-label="default input example" name="ds_produto" id="ds_produto" value="<?= $produto->ds_produto; ?>" required>
+                                                            </div>
+                                                        
+                                                            <div class="col-12">
+                                                                <label for="ds_ficha_tecnica">Ficha técnica</label>
+                                                                <input class="form-control" type="text" placeholder="Ficha técnica" aria-label="default input example" name="ds_ficha_tecnica" id="ds_ficha_tecnica" value="<?= $produto->ds_ficha_tecnica; ?>" required>
                                                             </div>
                                                         </div>
                                                     </form>
