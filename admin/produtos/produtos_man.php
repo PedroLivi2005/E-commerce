@@ -58,14 +58,14 @@ if(isset($evento)){
             
         case 'excluir':
             
-            if(Subcategorias::delete($cd_subcategoria)){
+            if(Produtos::delete($cd_produto)){
                 $msg_tipo = 1;
-                $msg_texto = "Subcategoria excluído com sucesso";
+                $msg_texto = "Produto excluído com sucesso";
                 header("location: index.php?msg_tipo=".$msg_tipo."&msg_texto=".$msg_texto);
             }
             else{
                 $msg_tipo = 2;
-                $msg_texto = "Erro ao excluir subcategoria.";
+                $msg_texto = "Erro ao excluir produto.";
                 header("location: index.php?msg_tipo=".$msg_tipo."&msg_texto=".$msg_texto."&cd_papel=".$cd_papel);
             }            
             
