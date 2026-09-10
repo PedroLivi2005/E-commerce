@@ -147,12 +147,23 @@ class Produtos {
         try {
             TTransaction::open();
 
-            $sql = "UPDATE ".self::TABLE." SET nm_produto = :nm_produto, cd_subcategoria = :cd_subcategoria WHERE ".self::ID." = :id";
+            $sql = "UPDATE ".self::TABLE." SET nm_produto = :nm_produto, 
+                                                cd_subcategoria = :cd_subcategoria, 
+                                                vl_produto = :vl_produto, 
+                                                vl_promocao = :vl_promocao WHERE ".self::ID." = :id";
 
             // Obtém a conexão
             $conn = TTransaction::get();
             $stmt = $conn->prepare($sql);
 
+            // $vl_produto;v
+            // $vl_promocao;
+            // $dt_validade_promocao;
+            // $ds_produto;
+            // $ds_ficha_tecnica;
+
+            $stmt->bindParam(':vl_promocao', $this->vl_promocao);
+            $stmt->bindParam(':vl_produto', $this->vl_produto);
             $stmt->bindParam(':cd_subcategoria', $this->cd_subcategoria);
             $stmt->bindParam(':nm_produto', $this->nm_produto);
             $stmt->bindParam(':id', $this->cd_produto);

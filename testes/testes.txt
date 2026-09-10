@@ -242,3 +242,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 FROM " . self::TABLE . " AS subcategorias
                 INNER JOIN categorias ON subcategorias.cd_categoria = categorias.cd_categoria
                 WHERE subcategorias.fg_status = 'A' ";*/
+
+
+Teclado Mecânico 
+Teclado mecânico com switches azuis e retroiluminação RGB personalizável.
+Switch: Outemu Blue; Conexão: USB 2.0; Comprimento do cabo: 1.8m; PBT Double Shot.
+
+289.9
+2026-10-31

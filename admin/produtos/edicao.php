@@ -45,7 +45,7 @@
                                                         <div class="row g-4">
                                                             <div class="col-8">
                                                                 <label for="nm_produto">Nome do produto</label>
-                                                                <input class="form-control" type="text" placeholder="Nome do produto" aria-label="default input example" name="nm_produto" id="nm_produto" value="<?= $produto->nm_produto; ?>" required>
+                                                                <input class="form-control" type="text" placeholder="" aria-label="default input example" name="nm_produto" id="nm_produto" value="<?= $produto->nm_produto; ?>" required>
                                                             </div>
                                                             <div class="col-2">
                                                                 <label for="cd_subcategoria">Subcategoria</label>
@@ -69,11 +69,11 @@
                                                             </div>
                                                             <div class="col-4">
                                                                 <label for="vl_produto">Valor do produto</label>
-                                                                <input class="form-control" type="text" placeholder="Valor do produto" aria-label="default input example" name="vl_produto" id="vl_produto" value="<?= $produto->vl_produto; ?>" required>
+                                                                <input class="form-control" type="text" placeholder="" aria-label="default input example" name="vl_produto" id="vl_produto" value="<?= $produto->vl_produto; ?>" required>
                                                             </div>
                                                             <div class="col-4">
                                                                 <label for="vl_promocao">Valor da promoção</label>
-                                                                <input class="form-control" type="text" placeholder="Valor da promoção" aria-label="default input example" name="vl_promocao" id="vl_promocao" value="<?= $produto->vl_promocao; ?>" required>
+                                                                <input class="form-control" type="text" placeholder="" aria-label="default input example" name="vl_promocao" id="vl_promocao" value="<?= $produto->vl_promocao; ?>" required>
                                                             </div>
                                                             <div class="col-4">
                                                                 <label for="dt_validade_promocao">Validade da promocão</label>
@@ -81,11 +81,11 @@
                                                             </div>
                                                             <div class="col-12">
                                                                 <label for="ds_produto">Descrição do produto</label>
-                                                                <input class="form-control" type="text" placeholder="Descrição do produto" aria-label="default input example" name="ds_produto" id="ds_produto" value="<?= $produto->ds_produto; ?>" required>
+                                                                <input class="form-control" type="text" placeholder="" aria-label="default input example" name="ds_produto" id="ds_produto" value="<?= $produto->ds_produto; ?>" required>
                                                             </div>
                                                             <div class="col-12">
                                                                 <label for="ds_ficha_tecnica">Ficha técnica</label>
-                                                                <input class="form-control" type="text" placeholder="Ficha técnica" aria-label="default input example" name="ds_ficha_tecnica" id="ds_ficha_tecnica" value="<?= $produto->ds_ficha_tecnica; ?>" required>
+                                                                <input class="form-control" type="text" placeholder="" aria-label="default input example" name="ds_ficha_tecnica" id="ds_ficha_tecnica" value="<?= $produto->ds_ficha_tecnica; ?>" required>
                                                             </div>
                                                         </div>
                                                     </form>
@@ -102,8 +102,8 @@
         </div>
     </div><!-- um if para cada campo -->
             <!-- $vl_produto;v
-                $vl_promocao;v
-                $dt_validade_promocao;v
+                $vl_promocao;
+                $dt_validade_promocao;
                 $ds_produto;v
                 $ds_ficha_tecnica;v -->
     <script>                
@@ -111,14 +111,17 @@
             if(document.edita.nm_produto.value == '')
                 alert("O campo Nome do produto n\u00e3o pode ficar em branco!");                          
             
-            if(document.edita.vl_produto.value == '')
+            else if(document.edita.vl_produto.value == '')
                 alert("O campo Valor do produto n\u00e3o pode ficar em branco!");
             
-            if(document.edita.ds_produto.value == '')
+            else if(document.edita.ds_produto.value == '')
                 alert("O campo Descrição do produto n\u00e3o pode ficar em branco!");
 
-            if(document.edita.ds_ficha_tecnica.value == '')
+            else if(document.edita.ds_ficha_tecnica.value == '')
                 alert("O campo Ficha técnica n\u00e3o pode ficar em branco!");
+
+            else if(document.edita.vl_promocao.value != '' && document.edita.dt_validade_promocao.value == '')
+                alert("O campo Validade da promocão n\u00e3o pode ficar em branco!");
 
             else
                 document.edita.submit();    

@@ -42,6 +42,17 @@ if(isset($evento)){
             // exit;
             $produto->nm_produto = $nm_produto;
             $produto->cd_subcategoria = $cd_subcategoria;
+            $produto->vl_produto = $vl_produto;
+            $produto->vl_promocao = $vl_promocao;
+            // $produto->dt_validade_promocao = $dt_validade_promocao;
+            // $produto->ds_produto = $ds_produto;
+            // $produto->ds_ficha_tecnica = $ds_ficha_tecnica;
+
+            // <!-- $vl_produto;v
+            //     $vl_promocao;v
+            //     $dt_validade_promocao;v
+            //     $ds_produto;v
+            //     $ds_ficha_tecnica;v -->
 
             if($produto->update()){
                 $msg_tipo = 1;
