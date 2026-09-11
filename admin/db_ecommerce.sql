@@ -132,7 +132,7 @@ INSERT INTO Produtos (
     7
 ),
 (
-    'Monitor 24" IPS 144Hz',
+    'Monitor 24 IPS 144Hz',
     899.00,
     799.00,
     '2026-11-15',
