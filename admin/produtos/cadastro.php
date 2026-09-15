@@ -36,22 +36,21 @@
                                                         <input type="hidden" name="evento" id="evento" value="cadastrar" />
                                                         <div class="row g-3">
                                                             <div class="col-8">
-
                                                                 <label for="nm_produto">Nome do produto</label>
                                                                 <input class="form-control" type="text" placeholder="" aria-label="default input example" name="nm_produto" id="nm_produto" required>
-
                                                             </div>
 
-                                                            <div class="col-4">
-                                                                
-                                                                <select class="form-select" aria-label="Default select example" name="cd_categoria" id="cd_categoria">
+                                                            <div class="col-2">
+                                                                <label for="cd_subcategoria">Subcategoria</label>
+                                                                <select class="form-select" aria-label="Default select example" name="cd_subcategoria" id="cd_subcategoria">
                                                                     <option selected value="0">Selecionar</option>
                                                                     <?php
-                                                                        $categorias = Categorias::listar($ds_categoria);
-                                                                        foreach ($categorias as $linha) {
-                                                                            $selected = ($linha->cd_categoria == $subcategoria->cd_categoria) ? 'selected' : '';
+                                                                        $subcategorias = Subcategorias::listar($ds_subcategoria);
+                                                                        foreach ($subcategorias as $linha) {
+                                                                            $selected = ($linha->cd_subcategoria == $produto->cd_subcategoria) ? 'selected' : '';
                                                                         ?>
-                                                                        <option value="<?php echo $linha->cd_categoria; ?>" <?= $selected; ?>><?php echo ucwords(strtolower($linha->ds_categoria)); ?></option>
+
+                                                                        <option value="<?php echo $linha->cd_subcategoria; ?>" <?= $selected; ?>><?php echo ucwords(strtolower($linha->ds_subcategoria)); ?></option>
                                                                     <?php
                                                                         }
                                                                     ?>
