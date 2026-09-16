@@ -105,9 +105,22 @@
             if(document.novo.nm_produto.value == ''){
                 alert("O campo Nome do produto n\u00e3o pode ficar em branco!");
             }
-            else if(document.novo.cd_categoria.value == 0){
+            else if(document.novo.cd_subcategoria.value == 0){
                 alert("O campo Subcategoria precisa ser selecionado!");
             }
+
+            else if(document.novo.vl_produto.value == '')
+                alert("O campo Valor do produto n\u00e3o pode ficar em branco!");
+            
+            else if(document.novo.ds_produto.value == '')
+                alert("O campo Descrição do produto n\u00e3o pode ficar em branco!");
+
+            else if(document.novo.ds_ficha_tecnica.value == '')
+                alert("O campo Ficha técnica n\u00e3o pode ficar em branco!");
+
+            else if(document.novo.vl_promocao.value != '' && document.novo.dt_validade_promocao.value == '')
+                alert("O campo Validade da promocão n\u00e3o pode ficar em branco!");
+
             else{
                 document.novo.submit();
             }

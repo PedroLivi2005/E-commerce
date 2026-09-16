@@ -12,10 +12,10 @@ if(isset($evento)){
     switch($evento){
         case 'cadastrar':
             
-            $subcategoria = new Subcategorias();
+            $produto = new Produtos();
 
-            // print_r($subcategoria);
-            // exit;
+            print_r($produto);
+            exit;
             $subcategoria->ds_subcategoria = $ds_subcategoria;
             $subcategoria->cd_categoria = $cd_categoria;
             

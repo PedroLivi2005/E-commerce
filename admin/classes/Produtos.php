@@ -42,6 +42,7 @@ class Produtos {
             
         }
     }
+    
     //Melhorar
     public function inserir() {
         $colunas = null;
@@ -49,13 +50,13 @@ class Produtos {
         try{
             TTransaction::open();
     
-            $sql = "INSERT INTO ".self::TABLE." (ds_subcategoria, cd_categoria) values (:ds_subcategoria, :cd_categoria)";
+            $sql = "INSERT INTO ".self::TABLE." (nm_produto, cd_subcategoria) values (:nm_produto, :cd_subcategoria)";
 
             $conn = TTransaction::get();
             $stmt = $conn->prepare($sql);
 
-            $stmt->bindParam(':cd_categoria', $this->cd_categoria);
-            $stmt->bindParam(':ds_subcategoria', $this->ds_subcategoria);
+            $stmt->bindParam(':cd_subcategoria', $this->cd_subcategoria);
+            $stmt->bindParam(':nm_produto', $this->nm_produto);
 
             $stmt->execute();
     
