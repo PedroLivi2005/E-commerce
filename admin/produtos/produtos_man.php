@@ -14,6 +14,7 @@ if(isset($evento)){
             
             $produto = new Produtos();
 
+            print_r($_POST);
             print_r($produto);
             exit;
             $subcategoria->ds_subcategoria = $ds_subcategoria;

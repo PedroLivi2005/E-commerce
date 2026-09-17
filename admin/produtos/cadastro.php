@@ -40,7 +40,7 @@
                                                                 <input class="form-control" type="text" placeholder="" aria-label="default input example" name="nm_produto" id="nm_produto" required>
                                                             </div>
 
-                                                            <div class="col-2">
+                                                            <div class="col-3">
                                                                 <label for="cd_subcategoria">Subcategoria</label>
                                                                 <select class="form-select" aria-label="Default select example" name="cd_subcategoria" id="cd_subcategoria">
                                                                     <option selected value="0">Selecionar</option>
@@ -57,10 +57,7 @@
                                                                 </select>
                                                             </div>
                                                             <div class="col-1">
-                                                                <button type="button" class="btn btn-success" onclick="salvar()">Salvar</button>
-                                                            </div>
-                                                            <div class="col-1">
-                                                                <button type="button" class="btn btn-danger" onclick="excluir()">Excluir</button>
+                                                                 <button type="button" class="btn btn-success" onclick="cadastrar()">Cadastrar</button>
                                                             </div>
                                                             <div class="col-4">
                                                                 <label for="vl_produto">Valor do produto</label>
@@ -76,15 +73,19 @@
                                                             </div>
                                                             <div class="col-12">
                                                                 <label for="ds_produto">Descrição do produto</label>
-                                                                <input class="form-control" type="text" placeholder="" aria-label="default input example" name="ds_produto" id="ds_produto" required>
+                                                                <br>
+                                                                <!-- <input class="form-control" type="text" placeholder="" aria-label="default input example" name="ds_produto" id="ds_produto" required> -->
+
+                                                                <textarea rows="10" cols="80" id="ds_produto" name="ds_produto" required></textarea>
                                                             </div>
+                                                            
+
                                                             <div class="col-12">
                                                                 <label for="ds_ficha_tecnica">Ficha técnica</label>
-                                                                <input class="form-control" type="text" placeholder="" aria-label="default input example" name="ds_ficha_tecnica" id="ds_ficha_tecnica" required>
-                                                            </div>
+                                                                <br>
+                                                                <!-- <input class="form-control" type="text" placeholder="" aria-label="default input example" name="ds_ficha_tecnica" id="ds_ficha_tecnica" required> -->
 
-                                                            <div class="col-2">
-                                                                 <button type="button" class="btn btn-success" onclick="cadastrar()">Cadastrar</button>
+                                                                <textarea rows="10" cols="80" id="ds_ficha_tecnica" name="ds_ficha_tecnica" required></textarea>
                                                             </div>
                                                         </div>
                                                     </form>
@@ -105,6 +106,7 @@
             if(document.novo.nm_produto.value == ''){
                 alert("O campo Nome do produto n\u00e3o pode ficar em branco!");
             }
+            
             else if(document.novo.cd_subcategoria.value == 0){
                 alert("O campo Subcategoria precisa ser selecionado!");
             }
