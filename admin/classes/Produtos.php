@@ -50,11 +50,30 @@ class Produtos {
         try{
             TTransaction::open();
     
-            $sql = "INSERT INTO ".self::TABLE." (nm_produto, cd_subcategoria) values (:nm_produto, :cd_subcategoria)";
+            $sql = "INSERT INTO ".self::TABLE." (nm_produto, 
+                                                cd_subcategoria, 
+                                                vl_produto, 
+                                                vl_promocao, 
+                                                dt_validade_promocao, 
+                                                ds_produto, 
+                                                ds_ficha_tecnica) 
+                                        values (
+                                                :nm_produto, 
+                                                :cd_subcategoria, 
+                                                :vl_produto, 
+                                                :vl_promocao, 
+                                                :dt_validade_promocao, 
+                                                :ds_produto, 
+                                                :ds_ficha_tecnica)";
 
             $conn = TTransaction::get();
             $stmt = $conn->prepare($sql);
 
+            $stmt->bindParam(':ds_ficha_tecnica', $this->ds_ficha_tecnica);
+            $stmt->bindParam(':ds_produto', $this->ds_produto);
+            $stmt->bindParam(':dt_validade_promocao', $this->dt_validade_promocao);
+            $stmt->bindParam(':vl_promocao', $this->vl_promocao);
+            $stmt->bindParam(':vl_produto', $this->vl_produto);
             $stmt->bindParam(':cd_subcategoria', $this->cd_subcategoria);
             $stmt->bindParam(':nm_produto', $this->nm_produto);
 

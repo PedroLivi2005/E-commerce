@@ -141,3 +141,15 @@ INSERT INTO Produtos (
     'A',
     14
 );
+
+--Apenas exemplos
+UPDATE subcategorias 
+SET cd_categoria = 6  
+WHERE cd_subcategoria = 9;
+
+DELETE FROM subcategorias 
+WHERE cd_subcategoria = 13;
+
+UPDATE produtos 
+SET fg_status ='A'  
+WHERE cd_produto = 3;

@@ -14,20 +14,26 @@ if(isset($evento)){
             
             $produto = new Produtos();
 
-            print_r($_POST);
-            print_r($produto);
-            exit;
-            $subcategoria->ds_subcategoria = $ds_subcategoria;
-            $subcategoria->cd_categoria = $cd_categoria;
+            // print_r($_POST);
+            // print_r($produto);
+            // exit;
+
+            $produto->nm_produto = $nm_produto;
+            $produto->cd_subcategoria = $cd_subcategoria;
+            $produto->vl_produto = $vl_produto;
+            $produto->vl_promocao = $vl_promocao;
+            $produto->dt_validade_promocao = $dt_validade_promocao;
+            $produto->ds_produto = $ds_produto;
+            $produto->ds_ficha_tecnica = $ds_ficha_tecnica;
             
-            if($subcategoria->inserir()){
+            if($produto->inserir()){
                 $msg_tipo = 1;
-                $msg_texto = "Subcategoria inserida sucesso!";
+                $msg_texto = "Produto inserido com sucesso!";
                 header("location: index.php?msg_tipo=".$msg_tipo."&msg_texto=".$msg_texto);
             }
             else{
                 $msg_tipo = 2;
-                $msg_texto = "Erro ao inserir a subcategoria!";
+                $msg_texto = "Erro ao inserir a produto!";
                 header("location: index.php?msg_tipo=".$msg_tipo."&msg_texto=".$msg_texto);
             }
             
