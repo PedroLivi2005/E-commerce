@@ -49,6 +49,20 @@ class Produtos {
         $valores = null;
         try{
             TTransaction::open();
+
+            $dt_validade_banco = null;
+            if (!empty($this->dt_validade_promocao)) {
+                // Se tiver barra '/', assume formato brasileiro (d/m/Y)
+                if (strpos($this->dt_validade_promocao, '/') !== false) {
+                    $dataObj = DateTime::createFromFormat('d/m/Y', $this->dt_validade_promocao);
+                    if ($dataObj) {
+                        $dt_validade_banco = $dataObj->format('Y-m-d');
+                    }
+                } else {
+                    // Caso já venha no formato AAAA-MM-DD (ex: input type="date")
+                    $dt_validade_banco = $this->dt_validade_promocao;
+                }
+            }
     
             $sql = "INSERT INTO ".self::TABLE." (nm_produto, 
                                                 cd_subcategoria, 
@@ -71,7 +85,10 @@ class Produtos {
 
             $stmt->bindParam(':ds_ficha_tecnica', $this->ds_ficha_tecnica);
             $stmt->bindParam(':ds_produto', $this->ds_produto);
-            $stmt->bindParam(':dt_validade_promocao', $this->dt_validade_promocao);
+
+            // Passa a variável convertida para o MySQL
+            $stmt->bindParam(':dt_validade_promocao', $dt_validade_banco);
+            //$stmt->bindParam(':dt_validade_promocao', $this->dt_validade_promocao);
             $stmt->bindParam(':vl_promocao', $this->vl_promocao);
             $stmt->bindParam(':vl_produto', $this->vl_produto);
             $stmt->bindParam(':cd_subcategoria', $this->cd_subcategoria);
@@ -161,11 +178,35 @@ class Produtos {
 		}
 	}
 
+    public function getDataValidadeFormatada(): string {
+        if (empty($this->dt_validade_promocao)) {
+            return '';
+        }
+
+        $timestamp = strtotime($this->dt_validade_promocao);
+        return $timestamp ? date('d/m/Y', $timestamp) : '';
+    }
+
     public function update() {
         $linhas = null;
 
         try {
             TTransaction::open();
+
+            $dt_validade_banco = null;
+
+            if (!empty($this->dt_validade_promocao)) {
+                // Se vier com barras (formato brasileiro DD/MM/AAAA)
+                if (strpos($this->dt_validade_promocao, '/') !== false) {
+                    $dataObj = DateTime::createFromFormat('d/m/Y', $this->dt_validade_promocao);
+                    if ($dataObj) {
+                        $dt_validade_banco = $dataObj->format('Y-m-d');
+                    }
+                } else {
+                    // Caso venha de um input type="date" ou já esteja no formato do banco (AAAA-MM-DD)
+                    $dt_validade_banco = $this->dt_validade_promocao;
+                }
+            }
 
             $sql = "UPDATE ".self::TABLE." SET nm_produto = :nm_produto, 
                                                 cd_subcategoria = :cd_subcategoria, 
@@ -181,7 +222,10 @@ class Produtos {
 
             $stmt->bindParam(':ds_ficha_tecnica', $this->ds_ficha_tecnica);
             $stmt->bindParam(':ds_produto', $this->ds_produto);
-            $stmt->bindParam(':dt_validade_promocao', $this->dt_validade_promocao);
+
+            // Passa a variável convertida em vez do atributo bruto
+            $stmt->bindParam(':dt_validade_promocao', $dt_validade_banco);
+            //$stmt->bindParam(':dt_validade_promocao', $this->dt_validade_promocao);
             $stmt->bindParam(':vl_promocao', $this->vl_promocao);
             $stmt->bindParam(':vl_produto', $this->vl_produto);
             $stmt->bindParam(':cd_subcategoria', $this->cd_subcategoria);

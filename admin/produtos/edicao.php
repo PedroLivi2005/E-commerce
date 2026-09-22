@@ -77,15 +77,17 @@
                                                             </div>
                                                             <div class="col-4">
                                                                 <label for="dt_validade_promocao">Validade da promocão</label>
-                                                                <input class="form-control" type="text" placeholder="aaaa/mm/dd" aria-label="default input example" name="dt_validade_promocao" id="dt_validade_promocao" value="<?= $produto->dt_validade_promocao; ?>" required>
+                                                                <input class="form-control" type="text" placeholder="dd/mm/aaaa" aria-label="default input example" name="dt_validade_promocao" id="dt_validade_promocao" value="<?= $produto->getDataValidadeFormatada(); ?>" required>
                                                             </div>
                                                             <div class="col-12">
                                                                 <label for="ds_produto">Descrição do produto</label>
-                                                                <input class="form-control" type="text" placeholder="" aria-label="default input example" name="ds_produto" id="ds_produto" value="<?= $produto->ds_produto; ?>" required>
+                                                                <br>
+                                                                <textarea rows="10" cols="80" id="ds_produto" name="ds_produto" required><?= $produto->ds_produto; ?></textarea>
                                                             </div>
                                                             <div class="col-12">
                                                                 <label for="ds_ficha_tecnica">Ficha técnica</label>
-                                                                <input class="form-control" type="text" placeholder="" aria-label="default input example" name="ds_ficha_tecnica" id="ds_ficha_tecnica" value="<?= $produto->ds_ficha_tecnica; ?>" required>
+                                                                <br>
+                                                                <textarea rows="10" cols="80" id="ds_ficha_tecnica" name="ds_ficha_tecnica" required><?= $produto->ds_ficha_tecnica; ?></textarea>
                                                             </div>
                                                         </div>
                                                     </form>
@@ -100,12 +102,7 @@
                 </div>
             </div>
         </div>
-    </div><!-- um if para cada campo -->
-            <!-- $vl_produto;v
-                $vl_promocao;
-                $dt_validade_promocao;
-                $ds_produto;v
-                $ds_ficha_tecnica;v -->
+    </div>
     <script>                
         function salvar(){
             if(document.edita.nm_produto.value == '')

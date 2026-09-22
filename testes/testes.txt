@@ -250,3 +250,13 @@ Switch: Outemu Blue; Conexão: USB 2.0; Comprimento do cabo: 1.8m; PBT Double Sh
 
 289.9
 2026-10-31
+
+input cadastro/edição antigo
+
+<!-- <input class="form-control" type="text" placeholder="" aria-label="default input example" name="ds_produto" id="ds_produto" required> -->
+
+<!-- <input class="form-control" type="text" placeholder="" aria-label="default input example" name="ds_ficha_tecnica" id="ds_ficha_tecnica" required> -->
+
+<!-- <input class="form-control" type="text" placeholder="" aria-label="default input example" name="ds_ficha_tecnica" id="ds_ficha_tecnica" value="?= //$produto->ds_ficha_tecnica; ?>" required> -->
+
+<!-- <input class="form-control" type="text" placeholder="" aria-label="default input example" name="ds_produto" id="ds_produto" required> -->

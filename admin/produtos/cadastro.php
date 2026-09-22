@@ -69,22 +69,16 @@
                                                             </div>
                                                             <div class="col-4">
                                                                 <label for="dt_validade_promocao">Validade da promocão</label>
-                                                                <input class="form-control" type="text" placeholder="aaaa/mm/dd" aria-label="default input example" name="dt_validade_promocao" id="dt_validade_promocao" required>
+                                                                <input class="form-control" type="text" placeholder="dd/mm/aaaa" aria-label="default input example" name="dt_validade_promocao" id="dt_validade_promocao" required>
                                                             </div>
                                                             <div class="col-12">
                                                                 <label for="ds_produto">Descrição do produto</label>
                                                                 <br>
-                                                                <!-- <input class="form-control" type="text" placeholder="" aria-label="default input example" name="ds_produto" id="ds_produto" required> -->
-
                                                                 <textarea rows="10" cols="80" id="ds_produto" name="ds_produto" required></textarea>
                                                             </div>
-                                                            
-
                                                             <div class="col-12">
                                                                 <label for="ds_ficha_tecnica">Ficha técnica</label>
                                                                 <br>
-                                                                <!-- <input class="form-control" type="text" placeholder="" aria-label="default input example" name="ds_ficha_tecnica" id="ds_ficha_tecnica" required> -->
-
                                                                 <textarea rows="10" cols="80" id="ds_ficha_tecnica" name="ds_ficha_tecnica" required></textarea>
                                                             </div>
                                                         </div>
