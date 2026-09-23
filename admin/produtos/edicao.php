@@ -43,11 +43,11 @@
                                                         <input type="hidden" name="evento" id="evento" value="salvar" />
                                                         <input type="hidden" name="cd_produto" id="cd_produto" value="<?= $produto->cd_produto; ?>" />
                                                         <div class="row g-4">
-                                                            <div class="col-8">
+                                                            <div class="col-7">
                                                                 <label for="nm_produto">Nome do produto</label>
                                                                 <input class="form-control" type="text" placeholder="" aria-label="default input example" name="nm_produto" id="nm_produto" value="<?= $produto->nm_produto; ?>" required>
                                                             </div>
-                                                            <div class="col-2">
+                                                            <div class="col-3">
                                                                 <label for="cd_subcategoria">Subcategoria</label>
                                                                 <select class="form-select" aria-label="Default select example" name="cd_subcategoria" id="cd_subcategoria">
                                                                     <?php

@@ -31,7 +31,6 @@
                                         <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-1001">
                                             <div class="row">
                                                 <div class="col-12">
-                                                    
                                                     <form action="produtos/produtos_man.php" name="novo" id="novo" method="post">
                                                         <input type="hidden" name="evento" id="evento" value="cadastrar" />
                                                         <div class="row g-3">

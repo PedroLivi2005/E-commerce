@@ -94,6 +94,7 @@
                                   <thead>
                                     <tr>
                                       <th scope="col">Produtos</th>
+                                      <th scope="col">Preço</th>
                                       <th scope="col">Subcategorias</th>
                                       <th scope="col">Editar</th>
                                     </tr>
@@ -110,6 +111,7 @@
                                     ?>
                                       <tr>
                                         <td scope="row"><?php echo ucwords(strtolower($linha->nm_produto)); ?></td>
+                                        <td scope="row">R$ <?php echo number_format($linha->vl_produto, 2, ',', '.'); ?></td>
                                         <td scope="row"><?php echo ucwords(strtolower($linha->ds_subcategoria ?? 'Não cadastrado')); ?></td>
                                         <td>
                                           <a class="btn btn-secondary btn-sm" href="produtos/edicao.php?cd_produto=<?php echo $linha->cd_produto; ?>">
