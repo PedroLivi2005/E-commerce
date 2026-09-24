@@ -178,13 +178,8 @@ class Produtos {
 		}
 	}
 
-    public function getDataValidadeFormatada(): string {
-        if (empty($this->dt_validade_promocao)) {
-            return '';
-        }
-
-        $timestamp = strtotime($this->dt_validade_promocao);
-        return $timestamp ? date('d/m/Y', $timestamp) : '';
+    public function getDataValidadeFormatada(): ?string {
+        return Geral::converterDataTela($this->dt_validade_promocao);
     }
 
     public function update() {
@@ -193,20 +188,7 @@ class Produtos {
         try {
             TTransaction::open();
 
-            $dt_validade_banco = null;
-
-            if (!empty($this->dt_validade_promocao)) {
-                // Se vier com barras (formato brasileiro DD/MM/AAAA)
-                if (strpos($this->dt_validade_promocao, '/') !== false) {
-                    $dataObj = DateTime::createFromFormat('d/m/Y', $this->dt_validade_promocao);
-                    if ($dataObj) {
-                        $dt_validade_banco = $dataObj->format('Y-m-d');
-                    }
-                } else {
-                    // Caso venha de um input type="date" ou já esteja no formato do banco (AAAA-MM-DD)
-                    $dt_validade_banco = $this->dt_validade_promocao;
-                }
-            }
+            $dt_validade_banco = Geral::converterDataBanco($this->dt_validade_promocao);
 
             $sql = "UPDATE ".self::TABLE." SET nm_produto = :nm_produto, 
                                                 cd_subcategoria = :cd_subcategoria, 
@@ -225,6 +207,7 @@ class Produtos {
 
             // Passa a variável convertida em vez do atributo bruto
             $stmt->bindParam(':dt_validade_promocao', $dt_validade_banco);
+
             //$stmt->bindParam(':dt_validade_promocao', $this->dt_validade_promocao);
             $stmt->bindParam(':vl_promocao', $this->vl_promocao);
             $stmt->bindParam(':vl_produto', $this->vl_produto);
@@ -244,7 +227,6 @@ class Produtos {
             // Desfaz as operações em caso de erro (Rollback)
             TTransaction::rollback();
             
-            // Aqui você pode adicionar um log do erro se necessário: erro_log($ex->getMessage());
             return false;
         }
     }

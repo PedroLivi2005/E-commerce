@@ -260,3 +260,30 @@ input cadastro/edição antigo
 <!-- <input class="form-control" type="text" placeholder="" aria-label="default input example" name="ds_ficha_tecnica" id="ds_ficha_tecnica" value="?= //$produto->ds_ficha_tecnica; ?>" required> -->
 
 <!-- <input class="form-control" type="text" placeholder="" aria-label="default input example" name="ds_produto" id="ds_produto" required> -->
+
+código para converter horas
+
+if (!empty($this->dt_validade_promocao)) {
+                // Se vier com barras (formato brasileiro DD/MM/AAAA)
+                if (strpos($this->dt_validade_promocao, '/') !== false) {
+                    $dataObj = DateTime::createFromFormat('d/m/Y', $this->dt_validade_promocao);
+                    if ($dataObj) {
+                        $dt_validade_banco = $dataObj->format('Y-m-d');
+                    }
+                } else {
+                    // Caso venha de um input type="date" ou já esteja no formato do banco (AAAA-MM-DD)
+                    $dt_validade_banco = $this->dt_validade_promocao;
+                }
+            }
+
+código para exibir datas convertidas
+
+public function getDataValidadeFormatada(): string {
+        if (empty($this->dt_validade_promocao)) {
+            $data = null;
+        }else{
+            $data = date('d/m/Y', strtotime($this->dt_validade_promocao));
+        }
+
+        return $data;
+    }
